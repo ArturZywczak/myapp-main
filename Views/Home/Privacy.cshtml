@@ -1,0 +1,237 @@
+@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MainApp</title>
+    <link rel="stylesheet" href="~/css/windows.css" asp-append-version="true" />
+</head>
+<body class="windows-mode">
+
+    <!-- === BOOT SCREEN === -->
+    <div id="boot-screen">
+        <div class="boot-logo">
+            <div class="boot-flag">
+                <div class="boot-flag-pane boot-flag-red"></div>
+                <div class="boot-flag-pane boot-flag-green"></div>
+                <div class="boot-flag-pane boot-flag-blue"></div>
+                <div class="boot-flag-pane boot-flag-yellow"></div>
+            </div>
+            <div class="boot-logo-text">
+                <span class="boot-ms-label">Artur's</span>
+                <div>
+                    <span class="boot-windows-label">Homepage</span><span class="boot-xp-label">xp</span>
+                </div>
+            </div>
+        </div>
+        <div class="boot-progress-wrap">
+            <div class="boot-progress-bar">
+                <div class="boot-bar-block"></div>
+                <div class="boot-bar-block"></div>
+                <div class="boot-bar-block"></div>
+            </div>
+        </div>
+        <div class="boot-copyright">Windows XP inspired homepage</div>
+        <div class="boot-brand"><em>Rudex</em></div>
+    </div>
+
+    <!-- === WELCOME SCREEN === -->
+    <div id="welcome-screen">
+        <div class="welcome-top"></div>
+        <div class="welcome-body">
+            <p class="welcome-text" data-i18n="welcome-text">Zapraszamy</p>
+        </div>
+        <div class="welcome-divider"></div>
+        <div class="welcome-bottom"></div>
+    </div>
+
+    <div class="desktop-container">
+
+        <main class="desktop" id="desktop">
+            <div class="desktop-icons">
+                <div class="desktop-icon" data-app="my-computer">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/My Computer.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-my-computer">Mój komputer</div>
+                </div>
+                <div class="desktop-icon" data-app="notepad">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/Notepad.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-notepad">Notatnik</div>
+                </div>
+                <div class="desktop-icon" data-folder="my-projects">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/Folder Closed.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-my-projects">Moje projekty</div>
+                </div>
+                <div class="desktop-icon" data-app="project-info">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/Notepad.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-project-info">O projekcie</div>
+                </div>
+                <div class="desktop-icon" data-app="cv-pl">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/Adobe Reader.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-cv-pl">CV Polskie</div>
+                </div>
+                <div class="desktop-icon" data-app="cv-en">
+                    <div class="desktop-icon-image">
+                        <img src="/images/IconPack/Adobe Reader.png" alt="" />
+                    </div>
+                    <div class="desktop-icon-label" data-i18n="icon-cv-en">CV English</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- === START MENU === -->
+        <div id="start-menu" class="start-menu hidden">
+            <div class="start-menu-header">
+                <img src="/images/IconPack/User Accounts.png" class="start-menu-user-icon" alt="" />
+                <span class="start-menu-username">webox</span>
+            </div>
+            <div class="start-menu-body">
+
+                <!-- left: programs -->
+                <div class="start-menu-left">
+                    <div class="start-menu-programs">
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Internet Explorer 6.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-ie">Internet Explorer</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Wordpad.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-wordpad">Wordpad</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Windows Media Player 10.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-mpc">Media Player Classic</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Adobe Reader.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-adobe">Adobe Reader</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Outlook Express.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-oe">Outlook Express</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Calculator.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-calc">Kalkulator</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Paint.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-paint">Paint</div>
+                        </div>
+                        <div class="start-menu-item">
+                            <img src="/images/IconPack/Tour XP.png" alt="" />
+                            <div class="start-menu-item-name" data-i18n="start-prog-tour">Samouczek systemu Windows XP</div>
+                        </div>
+                    </div>
+                    <div class="start-menu-item-allprograms">
+                        <img src="/images/IconPack/Programs.png" style="width:16px;height:16px;" alt="" />
+                        <span data-i18n="start-allprograms">Wszystkie programy</span>
+                        <span class="start-menu-arrow">▶</span>
+                    </div>
+                </div>
+
+                <!-- right: system links -->
+                <div class="start-menu-right">
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/My Pictures.png" alt="" />
+                        <span data-i18n="start-my-pictures">Moje obrazy</span>
+                    </div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/My Music.png" alt="" />
+                        <span data-i18n="start-my-music">Moja muzyka</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/My Computer.png" alt="" />
+                        <span data-i18n="start-my-computer">Mój komputer</span>
+                    </div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Control Panel.png" alt="" />
+                        <span data-i18n="start-control-panel">Panel sterowania</span>
+                    </div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Display Properties.png" alt="" />
+                        <span data-i18n="start-display">Ustawienia ekranu</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Help and Support.png" alt="" />
+                        <span data-i18n="start-help">Pomoc i obsługa techniczna</span>
+                    </div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Setup.png" alt="" />
+                        <span data-i18n="start-installer">Instalator</span>
+                    </div>
+                    <div class="start-menu-separator"></div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Search.png" alt="" />
+                        <span data-i18n="start-search">Wyszukaj</span>
+                    </div>
+                    <div class="start-menu-item-right">
+                        <img src="/images/IconPack/Run.png" alt="" />
+                        <span data-i18n="start-run">Uruchom…</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="start-menu-footer">
+                <button class="start-menu-footer-btn">
+                    <img src="/images/IconPack/Logout.png" alt="" />
+                    <span data-i18n="start-logoff">Wyloguj</span>
+                </button>
+                <button class="start-menu-footer-btn">
+                    <img src="/images/IconPack/Power.png" alt="" />
+                    <span data-i18n="start-shutdown">Wyłącz komputer</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- === LANGUAGE POPUP === -->
+        <div id="lang-popup" class="lang-popup hidden">
+            <div class="lang-popup-item active" data-lang="pl">
+                <span class="lang-popup-flag">🇵🇱</span>
+                <span data-i18n="lang-pl">Polski</span>
+            </div>
+            <div class="lang-popup-item" data-lang="en">
+                <span class="lang-popup-flag">🇬🇧</span>
+                <span data-i18n="lang-en">English</span>
+            </div>
+        </div>
+
+        <footer class="taskbar">
+            <div class="taskbar-start" id="start-button">
+                <img src="/images/windowsStart.png" alt="" class="start-icon" />
+                <span>start</span>
+            </div>
+            <div class="taskbar-windows">
+                <!-- open window buttons -->
+            </div>
+            <div class="taskbar-tray">
+                <div class="tray-lang-btn" id="lang-btn">
+                    <img src="/images/IconPack/Change Language.png" alt="" />
+                    <span id="lang-label">PL</span>
+                </div>
+                <div class="clock">
+                    <div class="clock-time">14:32</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/js/windows.js" asp-append-version="true"></script>
+</body>
+</html>
