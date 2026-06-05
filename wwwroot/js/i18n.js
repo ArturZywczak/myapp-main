@@ -11,12 +11,11 @@
 const translations = {
     pl: {
         // desktop icons
-        'icon-my-computer':   'Mój komputer',
+        'icon-my-computer':   'Mój komputer (o projekcie)',
         'icon-notepad':       'Notatnik',
         'icon-my-projects':   'Moje projekty',
         'icon-cv-pl':         'CV Polskie.pdf',
         'icon-cv-en':         'CV English.pdf',
-        'icon-project-info':  'O projekcie.txt',
 
         // start menu programs
         'start-prog-ie':     'Internet Explorer',
@@ -52,8 +51,8 @@ const translations = {
         'app-notepad':      'Bez tytułu — Notatnik',
         'app-cv-pl':        'CV Polskie (Polski)',
         'app-cv-en':        'CV Polskie (English)',
-        'app-project-info': 'O projekcie — Notatnik',
         'folder-my-projects': 'Moje projekty',
+        'app-health-tracker-readme': 'Health Tracker — README',
 
         // app menu bar
         'menu-file':      'Plik',
@@ -105,7 +104,7 @@ Motyw    : Windows XP – klasyczny Luna
 
 --- Funkcje ---
 • Animowana sekwencja startowa (boot + ekran powitalny)
-• System okien: przeciąganie, min/max, zarządzanie z-indeksem
+• System okien: przeciąganie, min/max, zarządzanie z-indeksem, zmiana rozmiaru
 • Menu Start z układem dwukolumnowym
 • Pasek zadań z zegarem i przyciskami okien
 • Notatnik z paskiem menu
@@ -115,23 +114,21 @@ Motyw    : Windows XP – klasyczny Luna
 • Przeglądarka PDF - moje CV
 
 --- Projekty ---
-Work Time            – ewidencja czasu pracy
-Ekstraklasa Terminal – tabela ligowa, symulacje Monte Carlo
-Pracownicy           – zarządzanie pracownikami
-CS Cases             – skrzynki CS:GO
-Ekstraklasa API      – REST API z danymi ligowymi
+Health Tracker       – zapisywanie posiłków i ćwiczeń za pomocą chatu Claude code
+Ekstraklasa Terminal – tabela ligowa, symulacja ostatniej kolejki
 
-Autor: Artur Żywczak`
+Autor: Artur Żywczak`,
+        
+        'project-info-readme': '=== Health Tracker — README ===\n\n(uzupełnij treść...)'
     },
 
     en: {
         // desktop icons
-        'icon-my-computer':   'My Computer',
+        'icon-my-computer':   'My Computer (About project)',
         'icon-notepad':       'Notepad',
         'icon-my-projects':   'My Projects',
         'icon-cv-pl':         'CV Polish.pdf',
         'icon-cv-en':         'CV English.pdf',
-        'icon-project-info':  'About Project.txt',
 
         // start menu programs
         'start-prog-ie':     'Internet Explorer',
@@ -167,8 +164,8 @@ Autor: Artur Żywczak`
         'app-notepad':      'Untitled — Notepad',
         'app-cv-pl':        'CV — webox (Polish)',
         'app-cv-en':        'CV — webox (English)',
-        'app-project-info': 'About Project — Notepad',
         'folder-my-projects': 'My Projects',
+        'app-health-tracker-readme': 'Health Tracker — README',
 
         // app menu bar
         'menu-file':      'File',
@@ -221,7 +218,7 @@ Server   : Kestrel
 
 --- Features ---
 • Animated startup sequence (boot + welcome screen)
-• Window system: drag, min/max, z-index management
+• Window system: drag, min/max, z-index management, change size
 • Start Menu with two-column layout
 • Taskbar with live clock and window buttons
 • Notepad with menu bar
@@ -231,13 +228,12 @@ Server   : Kestrel
 • PDF viewer – my CV
 
 --- Projects ---
-Work Time            – work time tracking
-Ekstraklasa Terminal – league table, Monte Carlo simulations
-Pracownicy           – employee management
-CS Cases             – CS:GO cases
-Ekstraklasa API      – REST API with league data
+Health Tracker       – app for tracking meals and training, used via claude chat
+Ekstraklasa Terminal – league table, simulation of the last round
 
-Author: webox`
+Author: webox`,
+
+        'project-info-readme': '=== Health Tracker — README ===\n\n(fill in content...)'
     }
 };
 

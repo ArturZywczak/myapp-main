@@ -109,14 +109,16 @@ function openFolder(folderId) {
     const offset = ((windowCounter - 1) % 10) * 20;
     const title  = t(folder.titleKey);
 
-    // Build the file-grid HTML; store name/icon as data attributes
-    // so the dblclick handler can pass them to openProjectWindow()
+    // Build the file-grid HTML; store name/icon/url/app as data attributes.
+    // Items with a url open in an iframe window; items with an app key open
+    // a registered app window (e.g. a notepad).
     const itemsHtml = folder.items.map(item => {
         const img = item.icon
             ? `<img src="${item.icon}" style="width:32px;height:32px;" alt="" />`
             : `<div class="icon-missing">✗</div>`;
         return `<div class="explorer-item"
                      data-url="${item.url  || ''}"
+                     data-app="${item.app  || ''}"
                      data-name="${item.name}"
                      data-icon="${item.icon || ''}">
             ${img}
@@ -213,12 +215,13 @@ function openFolder(folderId) {
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 
-    // Wire double-click on each grid item to open its sub-app
+    // Wire double-click on each grid item.
+    // Items with data-app open a registered app window (notepad etc.).
+    // Items with data-url open in a maximised iframe window.
     win.querySelectorAll('.explorer-item').forEach(el => {
         el.addEventListener('dblclick', () => {
-            const url = el.dataset.url;
-            if (!url) return;
-            openProjectWindow({ name: el.dataset.name, icon: el.dataset.icon, url });
+            if (el.dataset.app) { openWindow(el.dataset.app); return; }
+            if (el.dataset.url)  { openProjectWindow({ name: el.dataset.name, icon: el.dataset.icon, url: el.dataset.url }); }
         });
     });
 }

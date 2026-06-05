@@ -23,7 +23,7 @@ const apps = {
         icon: '/images/IconPack/My Computer.png',
         width: 500,
         height: 350,
-        content: '<p style="padding:10px;">Zawartość: Mój komputer</p>'
+        content: () => `<pre style="padding:12px;margin:0;font-family:inherit;font-size:12px;white-space:pre-wrap;">${t('project-info-text')}</pre>`
     },
 
     'notepad': {
@@ -34,25 +34,6 @@ const apps = {
         windowClass: 'notepad-window',
         // content is a function so t() is called at open-time,
         // picking up the current language
-        content: () => `
-            <div class="app-menubar">
-                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
-                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
-                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
-                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
-                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
-            </div>
-            <textarea class="notepad-textarea" spellcheck="false"></textarea>
-        `
-    },
-
-    'project-info': {
-        titleKey: 'app-project-info',
-        icon: '/images/IconPack/Notepad.png',
-        width: 660,
-        height: 500,
-        windowClass: 'notepad-window',
-        contentKey: 'project-info-text', // pre-fills the textarea on open
         content: () => `
             <div class="app-menubar">
                 <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
@@ -82,6 +63,26 @@ const apps = {
         height: 620,
         windowClass: 'pdf-window',
         content: '<iframe src="/docs/CV_EN.pdf" style="width:100%;height:100%;border:none;display:block;"></iframe>'
+    },
+
+    // Health Tracker README — opened from the Moje projekty explorer
+    'health-readme': {
+        titleKey: 'app-health-tracker-readme',
+        icon: '/images/IconPack/Notepad.png',
+        width: 660,
+        height: 500,
+        windowClass: 'notepad-window',
+        contentKey: 'project-info-readme',
+        content: () => `
+            <div class="app-menubar">
+                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
+                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
+                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
+                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
+                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
+            </div>
+            <textarea class="notepad-textarea" spellcheck="false"></textarea>
+        `
     }
 };
 
@@ -98,16 +99,21 @@ const folders = {
         icon: '/images/IconPack/Folder Closed.png',
         items: [
             {
-                name: 'Work Time.exe',
-                icon: '/images/IconPack/Date and Time.png',
-                url:  '/work-time/'
+                name: 'Health Tracker.exe',
+                icon: '/images/IconPack/Internet Hearts.png',
+                url:  '/health/'
+            },
+            {
+                name: 'Health Tracker README.txt',
+                icon: '/images/IconPack/Notepad.png',
+                app:  'health-readme'   // opens the registered app, not an iframe
             },
             {
                 name: 'Ekstraklasa Terminal.exe',
                 icon: '/images/IconPack/Command Prompt.png',
                 url:  '/terminal/'
-            },
-            {
+            }
+/*            {
                 name: 'Pracownicy.exe',
                 icon: '/images/IconPack/User Accounts.png',
                 url:  '/pracownicy/'
@@ -121,7 +127,7 @@ const folders = {
                 name: 'Ekstraklasa API.exe',
                 icon: '/images/IconPack/Internet Information Services 6.png',
                 url:  '/api/ekstraklasa/swagger'
-            }
+            }*/
         ]
     }
 };
