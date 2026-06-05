@@ -1,0 +1,225 @@
+/* ============================================================
+   boot.css
+   Boot screen, welcome screen, and the desktop reveal
+   transition that fires when the boot sequence completes.
+   ============================================================ */
+
+
+/* --- Boot screen ------------------------------------------ */
+
+/* Full-viewport black overlay shown before the desktop loads */
+#boot-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: white;
+}
+
+/* Logo: 4-pane Windows flag + "Artur's Homepage xp" text */
+.boot-logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 80px;
+}
+
+/* 4-pane Windows flag approximation */
+.boot-flag {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    width: 76px;
+    height: 76px;
+    transform: skewY(-2deg); /* slight perspective tilt */
+    flex-shrink: 0;
+}
+
+.boot-flag-pane {
+    border-radius: 3px;
+}
+
+/* Each pane uses a radial gradient to add a subtle 3-D highlight */
+.boot-flag-red    { background: radial-gradient(circle at 35% 35%, #f87830, #c83208); }
+.boot-flag-green  { background: radial-gradient(circle at 65% 35%, #58d858, #148014); }
+.boot-flag-blue   { background: radial-gradient(circle at 35% 65%, #58a8f8, #1048c8); }
+.boot-flag-yellow { background: radial-gradient(circle at 65% 65%, #f8d858, #c08810); }
+
+.boot-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+}
+
+.boot-ms-label {
+    font-size: 13px;
+    color: #bbb;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.boot-windows-label {
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: #fff;
+    line-height: 1;
+}
+
+/* "xp" superscript in orange */
+.boot-xp-label {
+    font-size: 22px;
+    color: #f07820;
+    font-style: italic;
+    font-weight: bold;
+    vertical-align: super;
+    margin-left: 3px;
+}
+
+
+/* --- Boot progress bar ------------------------------------ */
+
+.boot-progress-wrap {
+    position: absolute;
+    bottom: 200px;
+}
+
+.boot-progress-bar {
+    width: 148px;
+    height: 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+}
+
+/* Each block slides from left to right in an infinite loop */
+@keyframes boot-block-move {
+    0%   { transform: translateX(-200%); }
+    100% { transform: translateX(1600%); }
+}
+
+.boot-bar-block {
+    position: absolute;
+    width: 14px;
+    height: 8px;
+    top: 1px;
+    left: 0;
+    background: linear-gradient(to bottom, #7898f8, #2848d8);
+    border-radius: 2px;
+    animation: boot-block-move 3s linear infinite;
+    /* backwards fill-mode keeps blocks at start position during their delay
+       so they don't all overlap at t=0 */
+    animation-fill-mode: backwards;
+}
+
+/* Stagger the three blocks so they appear to chase each other */
+.boot-bar-block:nth-child(2) { animation-delay: 1.5s; }
+.boot-bar-block:nth-child(3) { animation-delay: 3s; }
+
+
+/* --- Boot screen text ------------------------------------- */
+
+/* Copyright line — bottom left */
+.boot-copyright {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    font-size: 11px;
+    color: #888;
+    font-family: Arial, sans-serif;
+}
+
+/* Skip Intro button — bottom right */
+.boot-skip-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 22px;
+    background: transparent;
+    border: 1px solid #555;
+    color: #999;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    padding: 4px 14px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.boot-skip-btn:hover {
+    color: #fff;
+    border-color: #aaa;
+}
+
+
+/* --- Welcome screen --------------------------------------- */
+
+/* Shown briefly between the boot screen and the desktop */
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    display: none; /* JS switches this to flex when needed */
+    flex-direction: column;
+}
+
+/* Thin dark-blue stripe at the very top */
+.welcome-top {
+    height: 38px;
+    background: #0c1e8a;
+    flex-shrink: 0;
+}
+
+/* Main body — radial gradient centred left, "Zapraszamy" text */
+.welcome-body {
+    flex: 1;
+    background: radial-gradient(ellipse at 18% 45%, #8898d8 0%, #5068c0 35%, #3050b0 70%, #2040a0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 38px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    text-shadow: 1px 2px 6px rgba(0,0,0,0.35);
+    letter-spacing: 1px;
+}
+
+/* Thin orange horizontal line — mimics the XP logon screen divider */
+.welcome-divider {
+    height: 3px;
+    background: linear-gradient(to right, #c06000, #f89820, #c06000);
+    flex-shrink: 0;
+}
+
+/* Bottom stripe */
+.welcome-bottom {
+    height: 56px;
+    background: linear-gradient(to bottom, #2838a8, #3848c0);
+    flex-shrink: 0;
+}
+
+
+/* --- Desktop reveal --------------------------------------- */
+
+/* Desktop starts fully transparent.
+   JS adds .booted after the boot sequence to reveal it.
+   No transition — instant cut matches the original XP behaviour. */
+.desktop-container {
+    opacity: 0;
+}
+
+.desktop-container.booted {
+    opacity: 1;
+}

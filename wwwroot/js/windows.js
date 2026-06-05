@@ -1,355 +1,20 @@
-// === TRANSLATIONS ===
-const translations = {
-    pl: {
-        // desktop icons
-        'icon-my-computer':   'Mój komputer',
-        'icon-notepad':       'Notatnik',
-        'icon-my-projects':   'Moje projekty',
-        'icon-cv-pl':         'CV Polskie.pdf',
-        'icon-cv-en':         'CV English.pdf',
-        'icon-project-info':  'O projekcie.txt',
+// ============================================================
+// windows.js
+// Window creation and management.
+// Depends on: i18n.js (t()), registry.js (apps, folders)
+// ============================================================
 
-        // start menu programs
-        'start-prog-ie':     'Internet Explorer',
-        'start-prog-wordpad':'Wordpad',
-        'start-prog-mpc':    'Media Player Classic',
-        'start-prog-adobe':  'Adobe Reader',
-        'start-prog-oe':     'Outlook Express',
-        'start-prog-calc':   'Kalkulator',
-        'start-prog-paint':  'Paint',
-        'start-prog-tour':   'Samouczek systemu Windows XP',
-        'start-allprograms': 'Wszystkie programy',
 
-        // start menu links
-        'start-my-pictures':    'Moje obrazy',
-        'start-my-music':       'Moja muzyka',
-        'start-my-computer':    'Mój komputer',
-        'start-control-panel':  'Panel sterowania',
-        'start-display':        'Ustawienia ekranu',
-        'start-help':           'Pomoc i obsługa techniczna',
-        'start-installer':      'Instalator',
-        'start-search':         'Wyszukaj',
-        'start-run':            'Uruchom…',
+// --- State ------------------------------------------------
 
-        // footer buttons
-        'start-logoff':   'Wyloguj',
-        'start-shutdown': 'Wyłącz komputer',
+let windowCounter = 0;  // increments for each new window; used to generate unique IDs
+let topZIndex     = 100; // tracks the highest z-index currently in use
 
-        // welcome
-        'welcome-text': 'Zapraszamy',
 
-        // app window titles
-        'app-my-computer':  'Mój komputer',
-        'app-notepad':      'Bez tytułu — Notatnik',
-        'app-cv-pl':        'CV Polskie (Polski)',
-        'app-cv-en':        'CV Polskie (English)',
-        'app-project-info': 'O projekcie — Notatnik',
-        'folder-my-projects': 'Moje projekty',
+// --- Helpers ----------------------------------------------
 
-        // app menu bar
-        'menu-file':      'Plik',
-        'menu-edit':      'Edycja',
-        'menu-format':    'Format',
-        'menu-view':      'Widok',
-        'menu-help':      'Pomoc',
-        'menu-favorites': 'Ulubione',
-        'menu-tools':     'Narzędzia',
-
-        // explorer toolbar
-        'toolbar-back':    'Wstecz',
-        'toolbar-forward': 'Dalej',
-        'toolbar-up':      'W górę',
-        'toolbar-search':  'Wyszukaj',
-        'toolbar-folders': 'Foldery',
-
-        // explorer sidebar
-        'panel-system-tasks': 'Zadania systemowe',
-        'panel-new-folder':   'Utwórz nowy folder',
-        'panel-publish':      'Opublikuj folder w sieci Web',
-        'panel-share':        'Udostępnij folder',
-        'panel-other-places': 'Inne miejsca',
-        'panel-desktop':      'Pulpit',
-        'panel-my-docs':      'Moje dokumenty',
-        'panel-my-computer':  'Mój komputer',
-        'panel-network':      'Miejsca sieciowe',
-        'panel-details':      'Szczegóły',
-
-        // address bar
-        'addressbar-label': 'Adres',
-        'desktop-path':     'C:\\Pulpit\\',
-
-        // language popup
-        'lang-pl': 'Polski',
-        'lang-en': 'English',
-
-        // project info text
-        'project-info-text':
-`=== Pulpit Windows XP ===
-
-Projekt to interaktywna strona internetowa symulująca
-klasyczny interfejs Windows XP, zbudowana w ASP.NET Core 8.0.
-
---- Technologie ---
-Backend  : ASP.NET Core 8.0 (C#)
-Frontend : HTML / CSS / JavaScript (vanilla)
-Motyw    : Windows XP – klasyczny Luna
-
---- Funkcje ---
-• Animowana sekwencja startowa (boot + ekran powitalny)
-• System okien: przeciąganie, min/max, zarządzanie z-indeksem
-• Menu Start z układem dwukolumnowym
-• Pasek zadań z zegarem i przyciskami okien
-• Notatnik z paskiem menu
-• Eksplorator folderów (styl XP)
-• Zmiana języka: Polski / English
-• Ikony z oryginalnego pakietu Windows XP
-• Przeglądarka PDF - moje CV
-
---- Projekty ---
-Work Time            – ewidencja czasu pracy
-Ekstraklasa Terminal – tabela ligowa, symulacje Monte Carlo
-Pracownicy           – zarządzanie pracownikami
-CS Cases             – skrzynki CS:GO
-Ekstraklasa API      – REST API z danymi ligowymi
-
-Autor: Artur Żywczak`
-    },
-
-    en: {
-        // desktop icons
-        'icon-my-computer':   'My Computer',
-        'icon-notepad':       'Notepad',
-        'icon-my-projects':   'My Projects',
-        'icon-cv-pl':         'CV Polish.pdf',
-        'icon-cv-en':         'CV English.pdf',
-        'icon-project-info':  'About Project.txt',
-
-        // start menu programs
-        'start-prog-ie':     'Internet Explorer',
-        'start-prog-wordpad':'Wordpad',
-        'start-prog-mpc':    'Media Player Classic',
-        'start-prog-adobe':  'Adobe Reader',
-        'start-prog-oe':     'Outlook Express',
-        'start-prog-calc':   'Calculator',
-        'start-prog-paint':  'Paint',
-        'start-prog-tour':   'Windows XP Tour',
-        'start-allprograms': 'All Programs',
-
-        // start menu links
-        'start-my-pictures':    'My Pictures',
-        'start-my-music':       'My Music',
-        'start-my-computer':    'My Computer',
-        'start-control-panel':  'Control Panel',
-        'start-display':        'Display Settings',
-        'start-help':           'Help and Support',
-        'start-installer':      'Installer',
-        'start-search':         'Search',
-        'start-run':            'Run…',
-
-        // footer buttons
-        'start-logoff':   'Log Off',
-        'start-shutdown': 'Turn Off Computer',
-
-        // welcome
-        'welcome-text': 'Welcome',
-
-        // app window titles
-        'app-my-computer':  'My Computer',
-        'app-notepad':      'Untitled — Notepad',
-        'app-cv-pl':        'CV — webox (Polish)',
-        'app-cv-en':        'CV — webox (English)',
-        'app-project-info': 'About Project — Notepad',
-        'folder-my-projects': 'My Projects',
-
-        // app menu bar
-        'menu-file':      'File',
-        'menu-edit':      'Edit',
-        'menu-format':    'Format',
-        'menu-view':      'View',
-        'menu-help':      'Help',
-        'menu-favorites': 'Favorites',
-        'menu-tools':     'Tools',
-
-        // explorer toolbar
-        'toolbar-back':    'Back',
-        'toolbar-forward': 'Forward',
-        'toolbar-up':      'Up',
-        'toolbar-search':  'Search',
-        'toolbar-folders': 'Folders',
-
-        // explorer sidebar
-        'panel-system-tasks': 'File and Folder Tasks',
-        'panel-new-folder':   'Make a new folder',
-        'panel-publish':      'Publish this folder to the Web',
-        'panel-share':        'Share this folder',
-        'panel-other-places': 'Other Places',
-        'panel-desktop':      'Desktop',
-        'panel-my-docs':      'My Documents',
-        'panel-my-computer':  'My Computer',
-        'panel-network':      'My Network Places',
-        'panel-details':      'Details',
-
-        // address bar
-        'addressbar-label': 'Address',
-        'desktop-path':     'C:\\Desktop\\',
-
-        // language popup
-        'lang-pl': 'Polish',
-        'lang-en': 'English',
-
-        // project info text
-        'project-info-text':
-`=== Windows XP Desktop ===
-
-An interactive website simulating the classic Windows XP
-interface, built with ASP.NET Core 8.0.
-
---- Technologies ---
-Backend  : ASP.NET Core 8.0 (C#)
-Frontend : HTML / CSS / JavaScript (vanilla)
-Theme    : Windows XP – classic Luna
-Server   : Kestrel
-
---- Features ---
-• Animated startup sequence (boot + welcome screen)
-• Window system: drag, min/max, z-index management
-• Start Menu with two-column layout
-• Taskbar with live clock and window buttons
-• Notepad with menu bar
-• Folder Explorer (XP style)
-• Language switcher: Polish / English
-• Icons from the original Windows XP icon pack
-• PDF viewer – my CV
-
---- Projects ---
-Work Time            – work time tracking
-Ekstraklasa Terminal – league table, Monte Carlo simulations
-Pracownicy           – employee management
-CS Cases             – CS:GO cases
-Ekstraklasa API      – REST API with league data
-
-Author: webox`
-    }
-};
-
-let currentLang = localStorage.getItem('xp-lang') || 'pl';
-
-function t(key) {
-    return translations[currentLang]?.[key] ?? translations.pl?.[key] ?? key;
-}
-
-function applyTranslations() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (key) el.textContent = t(key);
-    });
-    // update lang button label
-    const lbl = document.getElementById('lang-label');
-    if (lbl) lbl.textContent = currentLang.toUpperCase();
-}
-
-function setLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('xp-lang', lang);
-    // mark active in popup
-    document.querySelectorAll('.lang-popup-item').forEach(el => {
-        el.classList.toggle('active', el.dataset.lang === lang);
-    });
-    applyTranslations();
-}
-
-// === CLOCK ===
-function updateClock() {
-    const now = new Date();
-    const hours   = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const el = document.querySelector('.clock-time');
-    if (el) el.textContent = `${hours}:${minutes}`;
-}
-updateClock();
-setInterval(updateClock, 1000);
-
-// === APP REGISTRY ===
-const apps = {
-    'my-computer': {
-        titleKey: 'app-my-computer',
-        icon: '/images/IconPack/My Computer.png',
-        width: 500,
-        height: 350,
-        content: '<p style="padding:10px;">Zawartość: Mój komputer</p>'
-    },
-    'notepad': {
-        titleKey: 'app-notepad',
-        icon: '/images/IconPack/Notepad.png',
-        width: 600,
-        height: 400,
-        windowClass: 'notepad-window',
-        content: () => `
-            <div class="app-menubar">
-                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
-                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
-                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
-                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
-                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
-            </div>
-            <textarea class="notepad-textarea" spellcheck="false"></textarea>
-        `
-    },
-    'project-info': {
-        titleKey: 'app-project-info',
-        icon: '/images/IconPack/Notepad.png',
-        width: 660,
-        height: 500,
-        windowClass: 'notepad-window',
-        contentKey: 'project-info-text',
-        content: () => `
-            <div class="app-menubar">
-                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
-                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
-                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
-                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
-                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
-            </div>
-            <textarea class="notepad-textarea" spellcheck="false"></textarea>
-        `
-    },
-    'cv-pl': {
-        titleKey: 'app-cv-pl',
-        icon: '/images/IconPack/Adobe Reader.png',
-        width: 820,
-        height: 620,
-        windowClass: 'pdf-window',
-        content: '<iframe src="/docs/CV_PL.pdf" style="width:100%;height:100%;border:none;display:block;"></iframe>'
-    },
-    'cv-en': {
-        titleKey: 'app-cv-en',
-        icon: '/images/IconPack/Adobe Reader.png',
-        width: 820,
-        height: 620,
-        windowClass: 'pdf-window',
-        content: '<iframe src="/docs/CV_EN.pdf" style="width:100%;height:100%;border:none;display:block;"></iframe>'
-    }
-};
-
-// === FOLDER REGISTRY ===
-const folders = {
-    'my-projects': {
-        titleKey: 'folder-my-projects',
-        icon: '/images/IconPack/Folder Closed.png',
-        items: [
-            { name: 'Work Time.exe',            icon: '/images/IconPack/Date and Time.png',                   url: '/work-time/' },
-            { name: 'Ekstraklasa Terminal.exe', icon: '/images/IconPack/Command Prompt.png',                  url: '/terminal/' },
-            { name: 'Pracownicy.exe',           icon: '/images/IconPack/User Accounts.png',                   url: '/pracownicy/' },
-            { name: 'CS Cases.exe',             icon: '/images/IconPack/Minesweeper.png',                     url: '/cscases/' },
-            { name: 'Ekstraklasa API.exe',      icon: '/images/IconPack/Internet Information Services 6.png', url: '/api/ekstraklasa/swagger' }
-        ]
-    }
-};
-
-// === WINDOW MANAGEMENT ===
-let windowCounter = 0;
-let topZIndex = 100;
-
+// Returns an <img> tag for icon paths (starting with "/") or a
+// plain <span> for emoji/text fallbacks.
 function iconHtml(src, size) {
     const px = size || 16;
     if (!src) return '';
@@ -358,21 +23,37 @@ function iconHtml(src, size) {
         : `<span>${src}</span>`;
 }
 
+// Appends 8 transparent resize-handle divs to a window element.
+// Called once per window right after it is created.
+function addResizeHandles(win) {
+    ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'].forEach(dir => {
+        const h = document.createElement('div');
+        h.className = `resize-handle resize-${dir}`;
+        h.dataset.dir = dir;
+        win.appendChild(h);
+    });
+}
+
+
+// --- Open a registered app window -------------------------
+
+// Creates a window element from the apps{} registry entry,
+// adds it to the desktop and taskbar, then makes it active.
 function openWindow(appId) {
     const app = apps[appId];
     if (!app) return;
 
     windowCounter++;
     const winId  = `win-${windowCounter}`;
-    const offset = ((windowCounter - 1) % 10) * 20;
+    const offset = ((windowCounter - 1) % 10) * 20; // cascade new windows
     const title  = t(app.titleKey);
     const contentHtml = typeof app.content === 'function' ? app.content() : app.content;
 
     const win = document.createElement('div');
     win.className = 'window' + (app.windowClass ? ' ' + app.windowClass : '');
     win.id = winId;
-    win.style.top  = (50 + offset) + 'px';
-    win.style.left = (50 + offset) + 'px';
+    win.style.top    = (50 + offset) + 'px';
+    win.style.left   = (50 + offset) + 'px';
     if (app.width)  win.style.width  = app.width  + 'px';
     if (app.height) win.style.height = app.height + 'px';
 
@@ -391,7 +72,7 @@ function openWindow(appId) {
         <div class="window-content">${contentHtml}</div>
     `;
 
-    // pre-fill notepad textarea from translation key
+    // Pre-fill the notepad textarea if the app has a contentKey
     if (app.contentKey) {
         const ta = win.querySelector('.notepad-textarea');
         if (ta) ta.value = t(app.contentKey);
@@ -400,6 +81,7 @@ function openWindow(appId) {
     topZIndex++;
     win.style.zIndex = topZIndex;
 
+    // Add a matching button to the taskbar
     const btn = document.createElement('button');
     btn.className = 'taskbar-window-btn';
     btn.textContent = title;
@@ -412,6 +94,12 @@ function openWindow(appId) {
     setActiveWindow(winId);
 }
 
+
+// --- Open a folder (Explorer) window ----------------------
+
+// Builds the full XP Explorer chrome — menu bar, toolbar,
+// address bar, sidebar panels, and an icon grid.
+// Double-clicking a grid item calls openProjectWindow().
 function openFolder(folderId) {
     const folder = folders[folderId];
     if (!folder) return;
@@ -421,11 +109,16 @@ function openFolder(folderId) {
     const offset = ((windowCounter - 1) % 10) * 20;
     const title  = t(folder.titleKey);
 
+    // Build the file-grid HTML; store name/icon as data attributes
+    // so the dblclick handler can pass them to openProjectWindow()
     const itemsHtml = folder.items.map(item => {
         const img = item.icon
             ? `<img src="${item.icon}" style="width:32px;height:32px;" alt="" />`
             : `<div class="icon-missing">✗</div>`;
-        return `<div class="explorer-item" data-url="${item.url || ''}" data-name="${item.name}" data-icon="${item.icon || ''}">
+        return `<div class="explorer-item"
+                     data-url="${item.url  || ''}"
+                     data-name="${item.name}"
+                     data-icon="${item.icon || ''}">
             ${img}
             <div class="explorer-item-label">${item.name}</div>
         </div>`;
@@ -520,6 +213,7 @@ function openFolder(folderId) {
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 
+    // Wire double-click on each grid item to open its sub-app
     win.querySelectorAll('.explorer-item').forEach(el => {
         el.addEventListener('dblclick', () => {
             const url = el.dataset.url;
@@ -529,17 +223,27 @@ function openFolder(folderId) {
     });
 }
 
-// === PROJECT WINDOW (iframe, starts maximized) ===
+
+// --- Open a project in an iframe window -------------------
+
+// Creates a maximised window that embeds a sub-application via iframe.
+// The window starts maximised; clicking the restore button returns it
+// to 1000×650 px at the cascade position stored in its inline styles.
 function openProjectWindow(item) {
     windowCounter++;
     const winId  = `win-${windowCounter}`;
     const offset = ((windowCounter - 1) % 10) * 20;
-    const title  = item.name.replace(/\.exe$/i, '');
+
+    // Strip ".exe" suffix for the titlebar label
+    const title = item.name.replace(/\.exe$/i, '');
 
     const win = document.createElement('div');
     win.className = 'window project-window';
     win.id = winId;
-    // restore size/position used when user un-maximizes
+
+    // These inline styles define the restore size/position.
+    // They are overridden by .maximized (!important) while maximised,
+    // and used again when the user restores the window.
     win.style.top    = (50 + offset) + 'px';
     win.style.left   = (50 + offset) + 'px';
     win.style.width  = '1000px';
@@ -558,11 +262,12 @@ function openProjectWindow(item) {
             </div>
         </div>
         <div class="window-content window-content-iframe">
-            <iframe src="${item.url}" loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe>
+            <iframe src="${item.url}" loading="lazy"
+                    style="width:100%;height:100%;border:none;display:block;"></iframe>
         </div>
     `;
 
-    // start maximized — restore falls back to inline styles above
+    // Start maximised — restore falls back to the inline styles above
     win.classList.add('maximized');
 
     topZIndex++;
@@ -579,12 +284,18 @@ function openProjectWindow(item) {
     setActiveWindow(winId);
 }
 
+
+// --- Z-index and focus management -------------------------
+
+// Raises a window to the top of the stack and marks it active.
 function bringToFront(win) {
     topZIndex++;
     win.style.zIndex = topZIndex;
     setActiveWindow(win.id);
 }
 
+// Toggles active/inactive CSS on all windows and taskbar buttons.
+// Pass null to deactivate everything (e.g. after closing the last window).
 function setActiveWindow(winId) {
     document.querySelectorAll('.taskbar-window-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.windowId === winId);
@@ -593,292 +304,3 @@ function setActiveWindow(winId) {
         w.classList.toggle('inactive', w.id !== winId);
     });
 }
-
-// === CLICK HANDLER ===
-document.addEventListener('click', (e) => {
-    // close start menu
-    const startMenu = document.getElementById('start-menu');
-    if (startMenu && !startMenu.classList.contains('hidden')) {
-        if (!startMenu.contains(e.target) && !e.target.closest('#start-button')) {
-            startMenu.classList.add('hidden');
-        }
-    }
-
-    // close lang popup
-    const langPopup = document.getElementById('lang-popup');
-    if (langPopup && !langPopup.classList.contains('hidden')) {
-        if (!langPopup.contains(e.target) && !e.target.closest('#lang-btn')) {
-            langPopup.classList.add('hidden');
-        }
-    }
-
-    // window control buttons
-    const action = e.target.dataset.action;
-    if (action) {
-        const win = e.target.closest('.window');
-        if (action === 'close') {
-            document.querySelector(`[data-window-id="${win.id}"]`)?.remove();
-            win.remove();
-            setActiveWindow(null);
-        } else if (action === 'minimize') {
-            win.classList.add('minimized');
-            setActiveWindow(null);
-        } else if (action === 'maximize') {
-            win.classList.toggle('maximized');
-        }
-        return;
-    }
-
-    // taskbar window buttons
-    const taskBtn = e.target.closest('.taskbar-window-btn');
-    if (taskBtn) {
-        const win = document.getElementById(taskBtn.dataset.windowId);
-        if (!win) return;
-        const isMinimized = win.classList.contains('minimized');
-        const isActive    = taskBtn.classList.contains('active');
-        if (isMinimized)     { win.classList.remove('minimized'); bringToFront(win); }
-        else if (isActive)   { win.classList.add('minimized'); setActiveWindow(null); }
-        else                 { bringToFront(win); }
-        return;
-    }
-
-    // lang popup items
-    const langItem = e.target.closest('.lang-popup-item');
-    if (langItem) {
-        setLang(langItem.dataset.lang);
-        document.getElementById('lang-popup').classList.add('hidden');
-        return;
-    }
-
-    // desktop icon single click = select
-    const icon = e.target.closest('.desktop-icon');
-    if (icon) {
-        document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
-        icon.classList.add('selected');
-        return;
-    }
-
-    // click on empty desktop = deselect all
-    if (e.target.closest('#desktop') && !e.target.closest('.window')) {
-        document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
-    }
-});
-
-// === DOUBLE CLICK: titlebar maximize / open app/folder ===
-document.addEventListener('dblclick', (e) => {
-    const titlebar = e.target.closest('.window-titlebar');
-    if (titlebar && !e.target.dataset.action) {
-        toggleMaximize(titlebar.closest('.window'));
-        return;
-    }
-    const icon = e.target.closest('.desktop-icon');
-    if (!icon) return;
-    if (icon.dataset.app)    openWindow(icon.dataset.app);
-    else if (icon.dataset.folder) openFolder(icon.dataset.folder);
-});
-
-// === TOUCH: resize + double-tap titlebar ===
-let lastTapTime = 0, lastTapEl = null;
-
-document.addEventListener('touchstart', (e) => {
-    const t = e.touches[0];
-
-    // resize handle
-    const handle = e.target.closest('.resize-handle');
-    if (handle) {
-        e.preventDefault();
-        const win = handle.closest('.window');
-        if (!win.classList.contains('maximized')) startResize(t.clientX, t.clientY, win, handle.dataset.dir);
-        return;
-    }
-
-    // drag (titlebar)
-    const titlebar = e.target.closest('.window-titlebar');
-    if (titlebar && !e.target.dataset.action) {
-        const win = titlebar.closest('.window');
-        if (win.classList.contains('maximized')) return;
-        e.preventDefault();
-        bringToFront(win);
-        dragData = {
-            win,
-            offsetX: t.clientX - win.offsetLeft,
-            offsetY: t.clientY - win.offsetTop
-        };
-    }
-}, { passive: false });
-
-document.addEventListener('touchmove', (e) => {
-    if (!dragData && !resizeData) return;
-    e.preventDefault();
-    const t = e.touches[0];
-    if (dragData) {
-        dragData.win.style.left = (t.clientX - dragData.offsetX) + 'px';
-        dragData.win.style.top  = (t.clientY - dragData.offsetY) + 'px';
-    }
-    if (resizeData) applyResize(t.clientX, t.clientY);
-}, { passive: false });
-
-document.addEventListener('touchend', (e) => {
-    dragData = resizeData = null;
-    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = '');
-
-    const now = Date.now();
-    const titlebar = e.target.closest('.window-titlebar');
-    if (titlebar && !e.target.dataset.action) {
-        if (now - lastTapTime < 350 && lastTapEl === titlebar) {
-            toggleMaximize(titlebar.closest('.window'));
-            lastTapTime = 0; lastTapEl = null;
-            return;
-        }
-        lastTapTime = now; lastTapEl = titlebar;
-    } else {
-        lastTapTime = 0; lastTapEl = null;
-    }
-});
-
-// === START MENU TOGGLE ===
-const startBtn = document.getElementById('start-button');
-if (startBtn) {
-    startBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        document.getElementById('start-menu').classList.toggle('hidden');
-        document.getElementById('lang-popup').classList.add('hidden');
-    });
-}
-
-// === LANGUAGE BUTTON ===
-const langBtn = document.getElementById('lang-btn');
-if (langBtn) {
-    langBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const popup = document.getElementById('lang-popup');
-        if (popup.classList.contains('hidden')) {
-            // position popup above the button
-            const rect = langBtn.getBoundingClientRect();
-            popup.style.left   = rect.left + 'px';
-            popup.style.bottom = (window.innerHeight - rect.top + 2) + 'px';
-            popup.classList.remove('hidden');
-            document.getElementById('start-menu').classList.add('hidden');
-        } else {
-            popup.classList.add('hidden');
-        }
-    });
-}
-
-// === DRAGGING & RESIZING ===
-let dragData   = null;
-let resizeData = null;
-
-function toggleMaximize(win) {
-    win.classList.toggle('maximized');
-}
-
-function addResizeHandles(win) {
-    ['n','ne','e','se','s','sw','w','nw'].forEach(dir => {
-        const h = document.createElement('div');
-        h.className = `resize-handle resize-${dir}`;
-        h.dataset.dir = dir;
-        win.appendChild(h);
-    });
-}
-
-function startResize(clientX, clientY, win, dir) {
-    const rect = win.getBoundingClientRect();
-    resizeData = { win, dir, clientX, clientY,
-        startW: rect.width, startH: rect.height,
-        startL: win.offsetLeft, startT: win.offsetTop };
-    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
-}
-
-function applyResize(clientX, clientY) {
-    const { win, dir, clientX: sx, clientY: sy, startW, startH, startL, startT } = resizeData;
-    const dx = clientX - sx, dy = clientY - sy;
-    const minW = 220, minH = 120;
-    if (dir.includes('e')) win.style.width  = Math.max(minW, startW + dx) + 'px';
-    if (dir.includes('s')) win.style.height = Math.max(minH, startH + dy) + 'px';
-    if (dir.includes('w')) {
-        const w = Math.max(minW, startW - dx);
-        win.style.width = w + 'px';
-        win.style.left  = (startL + startW - w) + 'px';
-    }
-    if (dir.includes('n')) {
-        const h = Math.max(minH, startH - dy);
-        win.style.height = h + 'px';
-        win.style.top    = (startT + startH - h) + 'px';
-    }
-}
-
-document.addEventListener('mousedown', (e) => {
-    const clickedWin = e.target.closest('.window');
-    if (clickedWin && !e.target.dataset.action && !clickedWin.classList.contains('minimized')) {
-        bringToFront(clickedWin);
-    }
-
-    // resize handle
-    const handle = e.target.closest('.resize-handle');
-    if (handle) {
-        const win = handle.closest('.window');
-        if (!win.classList.contains('maximized')) startResize(e.clientX, e.clientY, win, handle.dataset.dir);
-        return;
-    }
-
-    // drag (titlebar only)
-    const titlebar = e.target.closest('.window-titlebar');
-    if (!titlebar || e.target.dataset.action) return;
-    const win = titlebar.closest('.window');
-    if (win.classList.contains('maximized')) return;
-
-    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
-    dragData = {
-        win,
-        offsetX: e.clientX - win.offsetLeft,
-        offsetY: e.clientY - win.offsetTop
-    };
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (dragData) {
-        dragData.win.style.left = (e.clientX - dragData.offsetX) + 'px';
-        dragData.win.style.top  = (e.clientY - dragData.offsetY) + 'px';
-    }
-    if (resizeData) applyResize(e.clientX, e.clientY);
-});
-
-document.addEventListener('mouseup', () => {
-    dragData = resizeData = null;
-    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = '');
-});
-
-// === BOOT SEQUENCE ===
-(function runBootSequence() {
-    const bootEl    = document.getElementById('boot-screen');
-    const welcomeEl = document.getElementById('welcome-screen');
-    const desktop   = document.querySelector('.desktop-container');
-    const skipBtn   = document.getElementById('skip-intro-btn');
-
-    if (!bootEl) return;
-
-    let t1, t2;
-
-    function showDesktop() {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        bootEl.style.display    = 'none';
-        welcomeEl.style.display = 'none';
-        desktop.classList.add('booted');
-    }
-
-    if (skipBtn) skipBtn.addEventListener('click', showDesktop);
-
-    t1 = setTimeout(() => {
-        bootEl.style.display    = 'none';
-        welcomeEl.style.display = 'flex';
-        welcomeEl.style.opacity = '1';
-
-        t2 = setTimeout(showDesktop, 3000);
-    }, 5000);
-}());
-
-// === INIT ===
-// apply saved language on load
-applyTranslations();
