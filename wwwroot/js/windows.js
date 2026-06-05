@@ -681,26 +681,45 @@ document.addEventListener('dblclick', (e) => {
 let lastTapTime = 0, lastTapEl = null;
 
 document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+
+    // resize handle
     const handle = e.target.closest('.resize-handle');
     if (handle) {
         e.preventDefault();
         const win = handle.closest('.window');
-        if (!win.classList.contains('maximized')) {
-            const t = e.touches[0];
-            startResize(t.clientX, t.clientY, win, handle.dataset.dir);
-        }
+        if (!win.classList.contains('maximized')) startResize(t.clientX, t.clientY, win, handle.dataset.dir);
+        return;
+    }
+
+    // drag (titlebar)
+    const titlebar = e.target.closest('.window-titlebar');
+    if (titlebar && !e.target.dataset.action) {
+        const win = titlebar.closest('.window');
+        if (win.classList.contains('maximized')) return;
+        e.preventDefault();
+        bringToFront(win);
+        dragData = {
+            win,
+            offsetX: t.clientX - win.offsetLeft,
+            offsetY: t.clientY - win.offsetTop
+        };
     }
 }, { passive: false });
 
 document.addEventListener('touchmove', (e) => {
-    if (!resizeData) return;
+    if (!dragData && !resizeData) return;
     e.preventDefault();
     const t = e.touches[0];
-    applyResize(t.clientX, t.clientY);
+    if (dragData) {
+        dragData.win.style.left = (t.clientX - dragData.offsetX) + 'px';
+        dragData.win.style.top  = (t.clientY - dragData.offsetY) + 'px';
+    }
+    if (resizeData) applyResize(t.clientX, t.clientY);
 }, { passive: false });
 
 document.addEventListener('touchend', (e) => {
-    resizeData = null;
+    dragData = resizeData = null;
     document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = '');
 
     const now = Date.now();
