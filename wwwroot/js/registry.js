@@ -107,6 +107,82 @@ const apps = {
         content: '<iframe src="http://www.linkedin.com/in/artur-żywczak-ab27b7413" style="width:100%;height:100%;border:none;display:block;"></iframe>'
     },
 
+    'outlook-express': {
+        titleKey: 'app-outlook-express',
+        icon: '/images/IconPack/Outlook Express.webp',
+        width: 620,
+        height: 500,
+        windowClass: 'oe-window',
+        content: () => `
+            <div class="app-menubar">
+                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
+                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
+                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
+                <span class="app-menubar-item" data-i18n="menu-insert">${t('menu-insert')}</span>
+                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
+                <span class="app-menubar-item" data-i18n="menu-tools">${t('menu-tools')}</span>
+                <span class="app-menubar-item" data-i18n="menu-message">${t('menu-message')}</span>
+                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
+            </div>
+            <div class="oe-toolbar">
+                <button class="oe-toolbar-btn" data-action="oe-send">
+                    <img src="/images/IconPack/OE Send.webp" style="width:24px;height:24px;" alt="">
+                    <span data-i18n="oe-btn-send">${t('oe-btn-send')}</span>
+                </button>
+                <div class="oe-toolbar-sep"></div>
+                <button class="oe-toolbar-btn">
+                    <img src="/images/IconPack/Cut.webp" style="width:24px;height:24px;" alt="">
+                    <span data-i18n="oe-btn-cut">${t('oe-btn-cut')}</span>
+                </button>
+                <button class="oe-toolbar-btn">
+                    <img src="/images/IconPack/Copy.webp" style="width:24px;height:24px;" alt="">
+                    <span data-i18n="oe-btn-copy">${t('oe-btn-copy')}</span>
+                </button>
+                <button class="oe-toolbar-btn">
+                    <img src="/images/IconPack/Paste.webp" style="width:24px;height:24px;" alt="">
+                    <span data-i18n="oe-btn-paste">${t('oe-btn-paste')}</span>
+                </button>
+                <button class="oe-toolbar-btn">
+                    <img src="/images/IconPack/Undo.webp" style="width:24px;height:24px;" alt="">
+                    <span data-i18n="oe-btn-undo">${t('oe-btn-undo')}</span>
+                </button>
+            </div>
+            <div class="oe-header">
+                <div class="oe-field-row">
+                    <span class="oe-field-label" data-i18n="oe-to">${t('oe-to')}</span>
+                    <button class="oe-addr-btn"><img src="/images/IconPack/Address Book.webp" style="width:16px;height:16px;" alt=""></button>
+                    <input class="oe-field-input" value="kontakt@rudex.click" readonly>
+                </div>
+                <div class="oe-field-row">
+                    <span class="oe-field-label" data-i18n="oe-from">${t('oe-from')}</span>
+                    <button class="oe-addr-btn"><img src="/images/IconPack/Address Book.webp" style="width:16px;height:16px;" alt=""></button>
+                    <input class="oe-field-input oe-from" type="email">
+                </div>
+                <div class="oe-field-row">
+                    <span class="oe-field-label" data-i18n="oe-subject">${t('oe-subject')}</span>
+                    <input class="oe-field-input oe-subject" style="margin-left:26px;">
+                </div>
+            </div>
+            <div class="oe-format-bar">
+                <select class="oe-format-select" style="width:110px;"><option>Arial</option></select>
+                <select class="oe-format-select" style="width:42px;"><option>10</option><option selected>12</option><option>14</option></select>
+                <div class="oe-toolbar-sep" style="height:20px;"></div>
+                <button class="oe-format-btn"><b>B</b></button>
+                <button class="oe-format-btn"><i>I</i></button>
+                <button class="oe-format-btn"><u>U</u></button>
+                <button class="oe-format-btn"><span style="border-bottom:2px solid #c00;">A</span></button>
+                <div class="oe-toolbar-sep" style="height:20px;"></div>
+                <button class="oe-format-btn">&#8801;</button>
+                <button class="oe-format-btn">&#8801;</button>
+            </div>
+            <div class="oe-body-area">
+                <textarea class="oe-body-input oe-body"></textarea>
+            </div>
+            <input class="oe-website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;">
+            <div class="oe-status"></div>
+        `
+    },
+
     // Health Tracker README — opened from the Moje projekty explorer
     'health-readme': {
         titleKey: 'app-health-tracker-readme',

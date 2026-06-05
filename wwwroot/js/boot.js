@@ -61,6 +61,29 @@ document.addEventListener('click', (e) => {
             toggleMaximize(win);
         } else if (action === 'newtab') {
             window.open(actionEl.dataset.url, '_blank');
+        } else if (action === 'oe-send') {
+            const from    = win.querySelector('.oe-from')?.value.trim();
+            const subject = win.querySelector('.oe-subject')?.value.trim();
+            const body    = win.querySelector('.oe-body')?.value.trim();
+            const website = win.querySelector('.oe-website')?.value ?? '';
+            const status  = win.querySelector('.oe-status');
+            if (!from || !subject || !body) {
+                status.textContent = t('oe-error-empty');
+                status.className = 'oe-status error';
+                return;
+            }
+            status.textContent = t('oe-sending');
+            status.className = 'oe-status';
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ from, subject, body, website })
+            })
+            .then(r => {
+                if (r.ok) { status.textContent = t('oe-sent');       status.className = 'oe-status success'; }
+                else      { status.textContent = t('oe-error-send'); status.className = 'oe-status error'; }
+            })
+            .catch(() => { status.textContent = t('oe-error-send'); status.className = 'oe-status error'; });
         }
         return;
     }

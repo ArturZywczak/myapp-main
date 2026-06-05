@@ -62,6 +62,22 @@ const translations = {
         'app-notepad-whyslow': 'Dlaczego to się tak wolno ładuje',
         'app-github': 'Mój profil GitHub',
         'app-linkedin': 'Mój profil LinkedIn',
+        'app-outlook-express': 'Nowa wiadomość',
+        'icon-outlook-express': 'Outlook Express',
+
+        // outlook express
+        'oe-to':          'Do:',
+        'oe-from':        'Od:',
+        'oe-subject':     'Temat:',
+        'oe-btn-send':    'Wyślij',
+        'oe-btn-cut':     'Wytnij',
+        'oe-btn-copy':    'Kopiuj',
+        'oe-btn-paste':   'Wklej',
+        'oe-btn-undo':    'Cofnij',
+        'oe-sending':     'Wysyłanie...',
+        'oe-sent':        'Wiadomość wysłana.',
+        'oe-error-empty': 'Wypełnij wszystkie pola.',
+        'oe-error-send':  'Błąd wysyłania. Spróbuj ponownie.',
 
         // app menu bar
         'menu-file':      'Plik',
@@ -71,6 +87,8 @@ const translations = {
         'menu-help':      'Pomoc',
         'menu-favorites': 'Ulubione',
         'menu-tools':     'Narzędzia',
+        'menu-insert':    'Wstaw',
+        'menu-message':   'Wiadomość',
 
         // explorer toolbar
         'toolbar-back':    'Wstecz',
@@ -188,6 +206,22 @@ Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu by
         'app-notepad-whyslow': 'Why does it load so slowly',
         'app-github': 'My GitHub Profile',
         'app-linkedin': 'My LinkedIn Profile',
+        'app-outlook-express': 'New Message',
+        'icon-outlook-express': 'Outlook Express',
+
+        // outlook express
+        'oe-to':          'To:',
+        'oe-from':        'From:',
+        'oe-subject':     'Subject:',
+        'oe-btn-send':    'Send',
+        'oe-btn-cut':     'Cut',
+        'oe-btn-copy':    'Copy',
+        'oe-btn-paste':   'Paste',
+        'oe-btn-undo':    'Undo',
+        'oe-sending':     'Sending...',
+        'oe-sent':        'Message sent.',
+        'oe-error-empty': 'Please fill in all fields.',
+        'oe-error-send':  'Send failed. Please try again.',
 
         // app menu bar
         'menu-file':      'File',
@@ -197,6 +231,8 @@ Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu by
         'menu-help':      'Help',
         'menu-favorites': 'Favorites',
         'menu-tools':     'Tools',
+        'menu-insert':    'Insert',
+        'menu-message':   'Message',
 
         // explorer toolbar
         'toolbar-back':    'Back',

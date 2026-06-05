@@ -240,6 +240,200 @@
 }
 
 
+/* --- Outlook Express compose window ----------------------- */
+
+.oe-window .window-content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ece9d8;
+}
+
+.oe-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding: 2px 4px;
+    border-bottom: 2px solid #aca899;
+    background: #ece9d8;
+    flex-shrink: 0;
+}
+
+.oe-toolbar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 3px 6px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: Tahoma, sans-serif;
+    font-size: 10px;
+    cursor: default;
+    color: black;
+    min-width: 40px;
+}
+
+.oe-toolbar-btn:hover {
+    background: linear-gradient(to bottom, #ddeeff, #c8dcf4);
+    border-color: #7b9ebd;
+}
+
+.oe-toolbar-btn:active {
+    background: linear-gradient(to bottom, #c8dcf4, #ddeeff);
+}
+
+.oe-toolbar-sep {
+    width: 1px;
+    height: 34px;
+    background: #aca899;
+    margin: 0 3px;
+    flex-shrink: 0;
+}
+
+/* Fields: To / From / Subject */
+.oe-header {
+    background: #ece9d8;
+    border-bottom: 2px solid #aca899;
+    flex-shrink: 0;
+}
+
+.oe-field-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #d4d0c8;
+    min-height: 24px;
+}
+
+.oe-field-row:last-child {
+    border-bottom: none;
+}
+
+.oe-field-label {
+    width: 68px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 4px;
+    color: #333;
+    user-select: none;
+}
+
+.oe-addr-btn {
+    background: linear-gradient(to bottom, #f0ede0, #dedad0);
+    border: 1px solid #aca899;
+    border-radius: 2px;
+    padding: 1px 3px;
+    cursor: default;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+}
+
+.oe-addr-btn:hover {
+    background: linear-gradient(to bottom, #ddeeff, #c8dcf4);
+    border-color: #7b9ebd;
+}
+
+.oe-field-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: white;
+    font-family: Tahoma, sans-serif;
+    font-size: 12px;
+    padding: 2px 4px;
+    height: 22px;
+    user-select: text;
+    color: black;
+}
+
+.oe-field-input[readonly] {
+    background: #ece9d8;
+    color: #555;
+}
+
+/* Formatting toolbar */
+.oe-format-bar {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding: 2px 4px;
+    border-bottom: 2px solid #aca899;
+    background: #ece9d8;
+    flex-shrink: 0;
+}
+
+.oe-format-btn {
+    width: 22px;
+    height: 20px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.oe-format-btn:hover {
+    background: linear-gradient(to bottom, #ddeeff, #c8dcf4);
+    border-color: #7b9ebd;
+}
+
+.oe-format-select {
+    height: 20px;
+    font-size: 11px;
+    border: 1px solid #aca899;
+    background: white;
+    font-family: Tahoma, sans-serif;
+}
+
+/* Message body */
+.oe-body-area {
+    flex: 1;
+    background: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.oe-body-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 6px 8px;
+    background: white;
+    color: black;
+    user-select: text;
+}
+
+/* Status bar */
+.oe-status {
+    font-size: 11px;
+    padding: 2px 6px;
+    color: #333;
+    background: #ece9d8;
+    border-top: 1px solid #aca899;
+    min-height: 18px;
+    flex-shrink: 0;
+}
+
+.oe-status.success { color: #006600; }
+.oe-status.error   { color: #cc0000; }
+
+
 /* --- Missing icon placeholder ----------------------------- */
 
 /* Shown when an icon file path cannot be resolved */
