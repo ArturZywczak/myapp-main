@@ -424,7 +424,7 @@ function openFolder(folderId) {
         const img = item.icon
             ? `<img src="${item.icon}" style="width:32px;height:32px;" alt="" />`
             : `<div class="icon-missing">✗</div>`;
-        return `<div class="explorer-item" data-url="${item.url || ''}">
+        return `<div class="explorer-item" data-url="${item.url || ''}" data-name="${item.name}" data-icon="${item.icon || ''}">
             ${img}
             <div class="explorer-item-label">${item.name}</div>
         </div>`;
@@ -518,12 +518,62 @@ function openFolder(folderId) {
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 
-    win.querySelectorAll('.explorer-item').forEach(item => {
-        item.addEventListener('dblclick', () => {
-            const url = item.dataset.url;
-            if (url) window.open(url, '_blank');
+    win.querySelectorAll('.explorer-item').forEach(el => {
+        el.addEventListener('dblclick', () => {
+            const url = el.dataset.url;
+            if (!url) return;
+            openProjectWindow({ name: el.dataset.name, icon: el.dataset.icon, url });
         });
     });
+}
+
+// === PROJECT WINDOW (iframe, starts maximized) ===
+function openProjectWindow(item) {
+    windowCounter++;
+    const winId  = `win-${windowCounter}`;
+    const offset = ((windowCounter - 1) % 10) * 20;
+    const title  = item.name.replace(/\.exe$/i, '');
+
+    const win = document.createElement('div');
+    win.className = 'window project-window';
+    win.id = winId;
+    // restore size/position used when user un-maximizes
+    win.style.top    = (50 + offset) + 'px';
+    win.style.left   = (50 + offset) + 'px';
+    win.style.width  = '1000px';
+    win.style.height = '650px';
+
+    win.innerHTML = `
+        <div class="window-titlebar">
+            <div class="window-title">
+                ${iconHtml(item.icon, 16)}
+                <span>${title}</span>
+            </div>
+            <div class="window-controls">
+                <button class="window-btn window-btn-min" data-action="minimize">_</button>
+                <button class="window-btn window-btn-max" data-action="maximize">⧉</button>
+                <button class="window-btn window-btn-close" data-action="close">✕</button>
+            </div>
+        </div>
+        <div class="window-content window-content-iframe">
+            <iframe src="${item.url}" loading="lazy" style="width:100%;height:100%;border:none;display:block;"></iframe>
+        </div>
+    `;
+
+    // start maximized — restore falls back to inline styles above
+    win.classList.add('maximized');
+
+    topZIndex++;
+    win.style.zIndex = topZIndex;
+
+    const btn = document.createElement('button');
+    btn.className = 'taskbar-window-btn';
+    btn.textContent = title;
+    btn.dataset.windowId = winId;
+    document.querySelector('.taskbar-windows').appendChild(btn);
+
+    document.getElementById('desktop').appendChild(win);
+    setActiveWindow(winId);
 }
 
 function bringToFront(win) {

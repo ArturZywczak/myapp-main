@@ -555,6 +555,12 @@ body.windows-mode .window-content span:not(.app-menubar *) {
     overflow: hidden;
 }
 
+/* === PROJECT WINDOW (iframe) === */
+.window-content-iframe {
+    padding: 0;
+    overflow: hidden;
+}
+
 /* === LANGUAGE BUTTON (tray) === */
 .tray-lang-btn {
     display: flex;
