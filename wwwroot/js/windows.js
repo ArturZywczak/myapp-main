@@ -228,7 +228,7 @@ function openFolder(folderId) {
 
 // Creates a maximised window that embeds a sub-application via iframe.
 // The window starts maximised; clicking the restore button returns it
-// to 1000×650 px at the cascade position stored in its inline styles.
+// to 1000x650 px at the cascade position stored in its inline styles.
 function openProjectWindow(item) {
     windowCounter++;
     const winId  = `win-${windowCounter}`;
