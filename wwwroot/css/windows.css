@@ -561,6 +561,41 @@ body.windows-mode .window-content span:not(.app-menubar *) {
     overflow: hidden;
 }
 
+/* === RESIZE HANDLES === */
+.window { overflow: visible; }
+
+.resize-handle {
+    position: absolute;
+    z-index: 10;
+    /* transparent — only cursor matters */
+}
+
+/* edges */
+.resize-n  { top: -4px;    left: 10px;  right: 10px; height: 8px;  cursor: n-resize;  }
+.resize-s  { bottom: -4px; left: 10px;  right: 10px; height: 8px;  cursor: s-resize;  }
+.resize-e  { right: -4px;  top: 10px; bottom: 10px; width: 8px;   cursor: e-resize;  }
+.resize-w  { left: -4px;   top: 10px; bottom: 10px; width: 8px;   cursor: w-resize;  }
+
+/* corners (on top of edges) */
+.resize-ne { top: -4px;    right: -4px;  width: 14px; height: 14px; cursor: ne-resize; }
+.resize-se { bottom: -4px; right: -4px;  width: 14px; height: 14px; cursor: se-resize; }
+.resize-sw { bottom: -4px; left: -4px;   width: 14px; height: 14px; cursor: sw-resize; }
+.resize-nw { top: -4px;    left: -4px;   width: 14px; height: 14px; cursor: nw-resize; }
+
+/* larger touch targets on mobile */
+@media (pointer: coarse) {
+    .resize-n, .resize-s { height: 20px; }
+    .resize-n  { top: -10px; }
+    .resize-s  { bottom: -10px; }
+    .resize-e, .resize-w { width: 20px; }
+    .resize-e  { right: -10px; }
+    .resize-w  { left: -10px; }
+    .resize-ne, .resize-se, .resize-sw, .resize-nw { width: 28px; height: 28px; }
+}
+
+/* hide handles when maximized */
+.window.maximized .resize-handle { display: none; }
+
 /* === LANGUAGE BUTTON (tray) === */
 .tray-lang-btn {
     display: flex;

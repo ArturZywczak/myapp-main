@@ -407,6 +407,7 @@ function openWindow(appId) {
     btn.dataset.i18n = app.titleKey;
     document.querySelector('.taskbar-windows').appendChild(btn);
 
+    addResizeHandles(win);
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 }
@@ -515,6 +516,7 @@ function openFolder(folderId) {
     btn.dataset.i18n = folder.titleKey;
     document.querySelector('.taskbar-windows').appendChild(btn);
 
+    addResizeHandles(win);
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 
@@ -572,6 +574,7 @@ function openProjectWindow(item) {
     btn.dataset.windowId = winId;
     document.querySelector('.taskbar-windows').appendChild(btn);
 
+    addResizeHandles(win);
     document.getElementById('desktop').appendChild(win);
     setActiveWindow(winId);
 }
@@ -661,12 +664,57 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// === DOUBLE CLICK: open app/folder ===
+// === DOUBLE CLICK: titlebar maximize / open app/folder ===
 document.addEventListener('dblclick', (e) => {
+    const titlebar = e.target.closest('.window-titlebar');
+    if (titlebar && !e.target.dataset.action) {
+        toggleMaximize(titlebar.closest('.window'));
+        return;
+    }
     const icon = e.target.closest('.desktop-icon');
     if (!icon) return;
     if (icon.dataset.app)    openWindow(icon.dataset.app);
     else if (icon.dataset.folder) openFolder(icon.dataset.folder);
+});
+
+// === TOUCH: resize + double-tap titlebar ===
+let lastTapTime = 0, lastTapEl = null;
+
+document.addEventListener('touchstart', (e) => {
+    const handle = e.target.closest('.resize-handle');
+    if (handle) {
+        e.preventDefault();
+        const win = handle.closest('.window');
+        if (!win.classList.contains('maximized')) {
+            const t = e.touches[0];
+            startResize(t.clientX, t.clientY, win, handle.dataset.dir);
+        }
+    }
+}, { passive: false });
+
+document.addEventListener('touchmove', (e) => {
+    if (!resizeData) return;
+    e.preventDefault();
+    const t = e.touches[0];
+    applyResize(t.clientX, t.clientY);
+}, { passive: false });
+
+document.addEventListener('touchend', (e) => {
+    resizeData = null;
+    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = '');
+
+    const now = Date.now();
+    const titlebar = e.target.closest('.window-titlebar');
+    if (titlebar && !e.target.dataset.action) {
+        if (now - lastTapTime < 350 && lastTapEl === titlebar) {
+            toggleMaximize(titlebar.closest('.window'));
+            lastTapTime = 0; lastTapEl = null;
+            return;
+        }
+        lastTapTime = now; lastTapEl = titlebar;
+    } else {
+        lastTapTime = 0; lastTapEl = null;
+    }
 });
 
 // === START MENU TOGGLE ===
@@ -698,8 +746,48 @@ if (langBtn) {
     });
 }
 
-// === DRAGGING ===
-let dragData = null;
+// === DRAGGING & RESIZING ===
+let dragData   = null;
+let resizeData = null;
+
+function toggleMaximize(win) {
+    win.classList.toggle('maximized');
+}
+
+function addResizeHandles(win) {
+    ['n','ne','e','se','s','sw','w','nw'].forEach(dir => {
+        const h = document.createElement('div');
+        h.className = `resize-handle resize-${dir}`;
+        h.dataset.dir = dir;
+        win.appendChild(h);
+    });
+}
+
+function startResize(clientX, clientY, win, dir) {
+    const rect = win.getBoundingClientRect();
+    resizeData = { win, dir, clientX, clientY,
+        startW: rect.width, startH: rect.height,
+        startL: win.offsetLeft, startT: win.offsetTop };
+    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
+}
+
+function applyResize(clientX, clientY) {
+    const { win, dir, clientX: sx, clientY: sy, startW, startH, startL, startT } = resizeData;
+    const dx = clientX - sx, dy = clientY - sy;
+    const minW = 220, minH = 120;
+    if (dir.includes('e')) win.style.width  = Math.max(minW, startW + dx) + 'px';
+    if (dir.includes('s')) win.style.height = Math.max(minH, startH + dy) + 'px';
+    if (dir.includes('w')) {
+        const w = Math.max(minW, startW - dx);
+        win.style.width = w + 'px';
+        win.style.left  = (startL + startW - w) + 'px';
+    }
+    if (dir.includes('n')) {
+        const h = Math.max(minH, startH - dy);
+        win.style.height = h + 'px';
+        win.style.top    = (startT + startH - h) + 'px';
+    }
+}
 
 document.addEventListener('mousedown', (e) => {
     const clickedWin = e.target.closest('.window');
@@ -707,11 +795,21 @@ document.addEventListener('mousedown', (e) => {
         bringToFront(clickedWin);
     }
 
+    // resize handle
+    const handle = e.target.closest('.resize-handle');
+    if (handle) {
+        const win = handle.closest('.window');
+        if (!win.classList.contains('maximized')) startResize(e.clientX, e.clientY, win, handle.dataset.dir);
+        return;
+    }
+
+    // drag (titlebar only)
     const titlebar = e.target.closest('.window-titlebar');
     if (!titlebar || e.target.dataset.action) return;
     const win = titlebar.closest('.window');
     if (win.classList.contains('maximized')) return;
 
+    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
     dragData = {
         win,
         offsetX: e.clientX - win.offsetLeft,
@@ -720,12 +818,17 @@ document.addEventListener('mousedown', (e) => {
 });
 
 document.addEventListener('mousemove', (e) => {
-    if (!dragData) return;
-    dragData.win.style.left = (e.clientX - dragData.offsetX) + 'px';
-    dragData.win.style.top  = (e.clientY - dragData.offsetY) + 'px';
+    if (dragData) {
+        dragData.win.style.left = (e.clientX - dragData.offsetX) + 'px';
+        dragData.win.style.top  = (e.clientY - dragData.offsetY) + 'px';
+    }
+    if (resizeData) applyResize(e.clientX, e.clientY);
 });
 
-document.addEventListener('mouseup', () => { dragData = null; });
+document.addEventListener('mouseup', () => {
+    dragData = resizeData = null;
+    document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = '');
+});
 
 // === BOOT SEQUENCE ===
 (function runBootSequence() {
