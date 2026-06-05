@@ -732,18 +732,28 @@ document.addEventListener('mouseup', () => { dragData = null; });
     const bootEl    = document.getElementById('boot-screen');
     const welcomeEl = document.getElementById('welcome-screen');
     const desktop   = document.querySelector('.desktop-container');
+    const skipBtn   = document.getElementById('skip-intro-btn');
 
     if (!bootEl) return;
 
-    setTimeout(() => {
+    let t1, t2;
+
+    function showDesktop() {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        bootEl.style.display    = 'none';
+        welcomeEl.style.display = 'none';
+        desktop.classList.add('booted');
+    }
+
+    if (skipBtn) skipBtn.addEventListener('click', showDesktop);
+
+    t1 = setTimeout(() => {
         bootEl.style.display    = 'none';
         welcomeEl.style.display = 'flex';
         welcomeEl.style.opacity = '1';
 
-        setTimeout(() => {
-            welcomeEl.style.display = 'none';
-            desktop.classList.add('booted');
-        }, 3000);
+        t2 = setTimeout(showDesktop, 3000);
     }, 5000);
 }());
 
