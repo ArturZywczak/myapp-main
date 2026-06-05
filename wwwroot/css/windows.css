@@ -260,6 +260,8 @@ body.windows-mode .window-content span:not(.app-menubar *) {
 .window-controls {
     display: flex;
     gap: 2px;
+    position: relative;
+    z-index: 20; /* above resize handles (z-index: 10) */
 }
 
 .window-btn {
