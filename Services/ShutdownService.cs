@@ -12,7 +12,7 @@ public class ShutdownService
     private const string FilePath = "/app/logs/shutdown_at";
     private const int DefaultSeconds = 15 * 60;   // 15 min
     private const int ExtendSeconds  = 10 * 60;   // 10 min
-    private const int ExtendThreshold = 5 * 60;   // można extend gdy ≤ 5 min
+    private const int ExtendThreshold = 10 * 60;   // można extend gdy ≤ 10 min
 
     private readonly object _lock = new();
 
@@ -61,7 +61,7 @@ public class ShutdownService
                 return (false, status);
 
             var shutdownAt = Read() ?? DateTimeOffset.UtcNow;
-            Write(shutdownAt.AddSeconds(ExtendSeconds));
+            Write(DateTimeOffset.UtcNow.AddSeconds(DefaultSeconds)); // reset to 15 min
         }
         return (true, GetStatus());
     }

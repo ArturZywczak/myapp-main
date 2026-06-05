@@ -28,7 +28,6 @@ let _shownDead     = false;
 
 function _stateOf(secs) {
     if (secs === null || secs <= 0) return 'dead';
-    if (secs <= 60)  return 'dead';
     if (secs <= 300) return 'low';
     if (secs <= 600) return 'medium';
     return 'full';
@@ -36,15 +35,13 @@ function _stateOf(secs) {
 
 function _fmtTime(secs) {
     if (!secs || secs <= 0) return t('battery-off');
-    const m = Math.floor(secs / 60);
-    const s = secs % 60;
-    if (m === 0) return `${s} s`;
-    if (s === 0) return `${m} min`;
-    return `${m} min ${s} s`;
+    const m   = Math.ceil(secs / 60);
+    const pct = Math.min(100, Math.round(secs / 900 * 100));
+    return `${m} min (${pct}%)`;
 }
 
 function _canExtend() {
-    return _lastSecs !== null && _lastSecs <= 300 && _lastSecs > 0;
+    return _lastSecs !== null && _lastSecs < 600 && _lastSecs > 0;
 }
 
 
@@ -135,12 +132,14 @@ function _hideBalloon() {
 
 function _refreshMenu() {
     const timeEl   = document.getElementById('battery-menu-remaining');
+    const iconEl   = document.getElementById('battery-menu-icon');
     const extendEl = document.getElementById('battery-menu-extend');
     if (timeEl)   timeEl.textContent = _fmtTime(_lastSecs);
+    if (iconEl)   iconEl.src = _ICONS[_lastState ?? 'full'];
     if (extendEl) {
         extendEl.textContent = t('battery-extend');
         extendEl.disabled    = _extendPending;
-        extendEl.classList.toggle('hidden', !_canExtend());
+        extendEl.disabled = !_canExtend() || _extendPending;
     }
 }
 

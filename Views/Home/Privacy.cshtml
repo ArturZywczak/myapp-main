@@ -252,12 +252,13 @@
 
         <!-- === SHUTDOWN MENU === -->
         <div id="battery-menu" class="battery-menu hidden">
-            <div class="battery-menu-row">
-                <span data-i18n="battery-remaining">Pozostało:</span>
-                <strong id="battery-menu-remaining">…</strong>
+            <div class="battery-menu-top">
+                <img id="battery-menu-icon" src="/images/battery-full.png" alt="" class="battery-menu-icon" />
+                <span id="battery-menu-remaining">…</span>
             </div>
+            <p class="battery-menu-info" data-i18n="battery-info"></p>
             <hr class="battery-menu-sep" />
-            <button id="battery-menu-extend" class="battery-menu-btn hidden"></button>
+            <button id="battery-menu-extend" class="battery-menu-btn"></button>
         </div>
 
         <footer class="taskbar">
