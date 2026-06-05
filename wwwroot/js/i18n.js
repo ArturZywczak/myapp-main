@@ -1,7 +1,7 @@
 // ============================================================
 // i18n.js
 // Translations and language-switching helpers.
-// No dependencies — load this first.
+// No dependencies - load this first.
 // ============================================================
 
 
@@ -16,7 +16,6 @@ const translations = {
         'icon-my-projects':   'Moje projekty',
         'icon-cv-pl':         'CV Polskie.pdf',
         'icon-cv-en':         'CV English.pdf',
-        'icon-whyslow':       'Dlaczego to się tak wolno ładuje.txt',
         'icon-github': 'Mój profil GitHub.exe',
         'icon-linkedin': 'Mój profil LinkedIn.exe',
 
@@ -54,16 +53,15 @@ const translations = {
 
         // app window titles
         'app-my-computer':  'Mój komputer',
-        'app-notepad':      'Bez tytułu — Notatnik',
+        'app-notepad':      'Bez tytułu - Notatnik',
         'app-cv-pl':        'CV Polskie (Polski)',
         'app-cv-en':        'CV Polskie (English)',
         'folder-my-projects': 'Moje projekty',
-        'app-health-tracker-readme': 'Health Tracker — README',
-        'app-notepad-whyslow': 'Dlaczego to się tak wolno ładuje',
+        'app-health-tracker-readme': 'Health Tracker - README',
         'app-github': 'Mój profil GitHub',
         'app-linkedin': 'Mój profil LinkedIn',
         'app-outlook-express': 'Nowa wiadomość',
-        'icon-outlook-express': 'Outlook Express',
+        'icon-outlook-express': 'Outlook Express - skontaktuj się ze mną',
 
         // outlook express
         'oe-to':          'Do:',
@@ -121,36 +119,35 @@ const translations = {
         'project-info-text':
 `=== Pulpit Windows XP ===
 
-Projekt to interaktywna strona internetowa symulująca
-klasyczny interfejs Windows XP, zbudowana w ASP.NET Core 8.0.
+Interaktywna strona portfolio symulująca klasyczny
+interfejs Windows XP, zbudowana w ASP.NET Core 8.0.
+Serwer: własny komputer domowy, Polska.
 
 --- Technologie ---
 Backend  : ASP.NET Core 8.0 (C#)
 Frontend : HTML / CSS / JavaScript (vanilla)
 Motyw    : Windows XP – klasyczny Luna
+Deploy   : Docker, nginx, własny serwer
 
 --- Funkcje ---
 • Animowana sekwencja startowa (boot + ekran powitalny)
-• System okien: przeciąganie, min/max, zarządzanie z-indeksem, zmiana rozmiaru
+• System okien: przeciąganie, min/max, resize, z-index
 • Menu Start z układem dwukolumnowym
 • Pasek zadań z zegarem i przyciskami okien
-• Notatnik z paskiem menu
-• Eksplorator folderów (styl XP)
+• Notatnik, Eksplorator folderów (styl XP)
+• Okno "Outlook Express" – formularz kontaktowy
+• Przycisk "Otwórz w nowej karcie" w titlebarze
 • Zmiana języka: Polski / English
-• Ikony z oryginalnego pakietu Windows XP
-• Przeglądarka PDF - moje CV
+• Przeglądarka PDF – moje CV
 
 --- Projekty ---
-Health Tracker       – zapisywanie posiłków i ćwiczeń za pomocą chatu Claude code
-Ekstraklasa Terminal – tabela ligowa, symulacja ostatniej kolejki
+Health Tracker       – śledzenie posiłków i ćwiczeń
+Ekstraklasa Terminal – tabela ligowa PKO BP Ekstraklasy
 
-Autor: Artur Żywczak`,
+Autor: Artur Żywczak
+Kontakt: kontakt@rudex.click`,
         
-        'project-info-readme': '=== Health Tracker — README ===\n\n(uzupełnij treść...)',
-
-        'notepad-whyslow-text': `Serwer działa na moim domowym komputerze z prędkością łącza 12 Mbps pobierania i 3 Mbps wysyłania. Mało. 
-Mieszkam na wsi i to w miejscu daleko od centrum. Światłowodu nie ma i podobno długo nie będzie, jedyna opcja to internet radiowy.
-Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu było nauczenie się jak postawić taki projekt od zera.`
+        'project-info-readme': '=== Health Tracker - README ===\n\n(uzupełnij treść...)',
     },
 
     en: {
@@ -160,7 +157,6 @@ Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu by
         'icon-my-projects':   'My Projects',
         'icon-cv-pl':         'CV Polish.pdf',
         'icon-cv-en': 'CV English.pdf',
-        'icon-whyslow': 'Why does it load so slowly.txt',
         'icon-github': 'My Github Profile.exe',
         'icon-linkedin': 'My LinkedIn Profile.exe',
 
@@ -198,16 +194,15 @@ Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu by
 
         // app window titles
         'app-my-computer':  'My Computer',
-        'app-notepad':      'Untitled — Notepad',
-        'app-cv-pl':        'CV — webox (Polish)',
-        'app-cv-en':        'CV — webox (English)',
+        'app-notepad':      'Untitled - Notepad',
+        'app-cv-pl':        'CV - webox (Polish)',
+        'app-cv-en':        'CV - webox (English)',
         'folder-my-projects': 'My Projects',
-        'app-health-tracker-readme': 'Health Tracker — README',
-        'app-notepad-whyslow': 'Why does it load so slowly',
+        'app-health-tracker-readme': 'Health Tracker - README',
         'app-github': 'My GitHub Profile',
         'app-linkedin': 'My LinkedIn Profile',
         'app-outlook-express': 'New Message',
-        'icon-outlook-express': 'Outlook Express',
+        'icon-outlook-express': 'Outlook Express - contact me',
 
         // outlook express
         'oe-to':          'To:',
@@ -265,37 +260,35 @@ Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu by
         'project-info-text':
 `=== Windows XP Desktop ===
 
-An interactive website simulating the classic Windows XP
-interface, built with ASP.NET Core 8.0.
+An interactive portfolio website simulating the classic
+Windows XP interface, built with ASP.NET Core 8.0.
+Server: personal home computer, Poland.
 
 --- Technologies ---
 Backend  : ASP.NET Core 8.0 (C#)
 Frontend : HTML / CSS / JavaScript (vanilla)
 Theme    : Windows XP – classic Luna
-Server   : Kestrel
+Deploy   : Docker, nginx, self-hosted
 
 --- Features ---
 • Animated startup sequence (boot + welcome screen)
-• Window system: drag, min/max, z-index management, change size
+• Window system: drag, min/max, resize, z-index
 • Start Menu with two-column layout
 • Taskbar with live clock and window buttons
-• Notepad with menu bar
-• Folder Explorer (XP style)
+• Notepad, Folder Explorer (XP style)
+• Outlook Express window – contact form
+• "Open in new tab" button in title bar
 • Language switcher: Polish / English
-• Icons from the original Windows XP icon pack
 • PDF viewer – my CV
 
 --- Projects ---
-Health Tracker       – app for tracking meals and training, used via claude chat
-Ekstraklasa Terminal – league table, simulation of the last round
+Health Tracker       – meal and workout tracker
+Ekstraklasa Terminal – PKO BP Ekstraklasa league table
 
-Author: webox`,
+Author: Artur Żywczak
+Contact: kontakt@rudex.click`,
 
-        'project-info-readme': '=== Health Tracker — README ===\n\n(fill in content...)',
-
-        'notepad-whyslow-text': `Server runs on my local PC with connection speeds of 12Mbps down 3Mbps up.
-Thats definetly not enough. I live in pretty remote area, there is no fiber connection and propably there won't be for long time.
-I could use some kind of hosting but one of goals of this project was to learn how to make everything work from scratch.`
+        'project-info-readme': '=== Health Tracker - README ===\n\n(fill in content...)',
     }
 };
 

@@ -22,7 +22,7 @@
     z-index: 1000; /* sits above desktop windows */
 }
 
-/* Start button — green pill on the left */
+/* Start button - green pill on the left */
 .taskbar-start {
     height: 100%;
     padding: 0 28px 0 10px;
@@ -88,7 +88,7 @@
     background: linear-gradient(to bottom, #5092ff, #2c70e0);
 }
 
-/* Active (currently focused) window button — inverted gradient */
+/* Active (currently focused) window button - inverted gradient */
 .taskbar-window-btn.active {
     background: linear-gradient(to bottom, #1a4fbb 0%, #2566d4 50%, #3c81f3 100%);
     box-shadow: inset 1px 1px 3px rgba(0,0,0,0.4);
@@ -225,7 +225,7 @@
     display: none;
 }
 
-/* Header — blue gradient with user avatar and username */
+/* Header - blue gradient with user avatar and username */
 .start-menu-header {
     background: linear-gradient(to bottom, #2170c4 0%, #1f5ab5 40%, #1a4ea6 100%);
     color: white;
@@ -254,7 +254,7 @@
     display: flex;
 }
 
-/* Left column — white background, list of pinned programs */
+/* Left column - white background, list of pinned programs */
 .start-menu-left {
     flex: 1;
     display: flex;
@@ -267,7 +267,7 @@
     padding: 4px 0;
 }
 
-/* Right column — light blue, system navigation links */
+/* Right column - light blue, system navigation links */
 .start-menu-right {
     width: 210px;
     background: #d3e5f5;
@@ -357,7 +357,7 @@
     flex-shrink: 0;
 }
 
-/* Footer — Log Off / Turn Off Computer */
+/* Footer - Log Off / Turn Off Computer */
 .start-menu-footer {
     background: linear-gradient(to bottom, #c8d8f0, #a8c0e0);
     border-top: 2px solid #7b9ebd;

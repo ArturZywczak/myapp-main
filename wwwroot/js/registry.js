@@ -1,6 +1,6 @@
 // ============================================================
 // registry.js
-// App and folder registry — defines what each window looks
+// App and folder registry - defines what each window looks
 // like and what it contains.
 // Depends on: i18n.js  (t() is called inside content functions)
 // ============================================================
@@ -10,12 +10,12 @@
 
 // Each key matches the data-app attribute on a desktop icon or
 // start-menu item.  Properties:
-//   titleKey   — i18n key for the window title
-//   icon       — path to the 16-px icon shown in the titlebar
-//   width/height — initial window size in pixels
-//   windowClass  — optional extra CSS class on the window element
-//   content    — HTML string or function returning HTML
-//   contentKey — i18n key whose value is pre-filled into a notepad textarea
+//   titleKey   - i18n key for the window title
+//   icon       - path to the 16-px icon shown in the titlebar
+//   width/height - initial window size in pixels
+//   windowClass  - optional extra CSS class on the window element
+//   content    - HTML string or function returning HTML
+//   contentKey - i18n key whose value is pre-filled into a notepad textarea
 const apps = {
 
     'my-computer': {
@@ -46,25 +46,6 @@ const apps = {
         `
     },
 
-    'notepad-whyslow': {
-        titleKey: 'app-notepad-whyslow',
-        icon: '/images/IconPack/Notepad.webp',
-        width: 600,
-        height: 400,
-        windowClass: 'notepad-window',
-        // content is a function so t() is called at open-time,
-        // picking up the current language
-        content: () => `
-            <div class="app-menubar">
-                <span class="app-menubar-item" data-i18n="menu-file">${t('menu-file')}</span>
-                <span class="app-menubar-item" data-i18n="menu-edit">${t('menu-edit')}</span>
-                <span class="app-menubar-item" data-i18n="menu-format">${t('menu-format')}</span>
-                <span class="app-menubar-item" data-i18n="menu-view">${t('menu-view')}</span>
-                <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
-            </div>
-            <textarea class="notepad-textarea" spellcheck="false">${t('notepad-whyslow-text')}</textarea>
-        `
-    },
 
     // CV files open in an iframe so the browser renders the PDF inline
     'cv-pl': {
@@ -99,7 +80,7 @@ const apps = {
 
     'linkedin-link': {
         titleKey: 'app-linkedin',
-        icon: '/images/IconPack/linkedin.png',
+        icon: '/images/IconPack/linkedin.webp',
         url: 'http://www.linkedin.com/in/artur-żywczak-ab27b7413',
         width: 820,
         height: 620,
@@ -183,7 +164,7 @@ const apps = {
         `
     },
 
-    // Health Tracker README — opened from the Moje projekty explorer
+    // Health Tracker README - opened from the Moje projekty explorer
     'health-readme': {
         titleKey: 'app-health-tracker-readme',
         icon: '/images/IconPack/Notepad.webp',

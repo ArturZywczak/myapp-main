@@ -127,7 +127,7 @@
 
 /* --- Boot screen text ------------------------------------- */
 
-/* Copyright line — bottom left */
+/* Copyright line - bottom left */
 .boot-copyright {
     position: absolute;
     bottom: 18px;
@@ -137,7 +137,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* Skip Intro button — bottom right */
+/* Skip Intro button - bottom right */
 .boot-skip-btn {
     position: absolute;
     bottom: 14px;
@@ -177,7 +177,7 @@
     flex-shrink: 0;
 }
 
-/* Main body — radial gradient centred left, "Zapraszamy" text */
+/* Main body - radial gradient centred left, "Zapraszamy" text */
 .welcome-body {
     flex: 1;
     background: radial-gradient(ellipse at 18% 45%, #8898d8 0%, #5068c0 35%, #3050b0 70%, #2040a0 100%);
@@ -196,7 +196,7 @@
     letter-spacing: 1px;
 }
 
-/* Thin orange horizontal line — mimics the XP logon screen divider */
+/* Thin orange horizontal line - mimics the XP logon screen divider */
 .welcome-divider {
     height: 3px;
     background: linear-gradient(to right, #c06000, #f89820, #c06000);
@@ -215,7 +215,7 @@
 
 /* Desktop starts fully transparent.
    JS adds .booted after the boot sequence to reveal it.
-   No transition — instant cut matches the original XP behaviour. */
+   No transition - instant cut matches the original XP behaviour. */
 .desktop-container {
     opacity: 0;
 }

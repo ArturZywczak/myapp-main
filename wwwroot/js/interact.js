@@ -35,7 +35,7 @@ function startResize(clientX, clientY, win, dir) {
         startL: win.offsetLeft,
         startT: win.offsetTop
     };
-    // Iframes capture mouse events — disable them during resize
+    // Iframes capture mouse events - disable them during resize
     document.querySelectorAll('iframe').forEach(f => f.style.pointerEvents = 'none');
 }
 
@@ -128,7 +128,7 @@ let lastTapEl   = null;
 document.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
 
-    // Touch on a resize handle — start resize, prevent page scroll
+    // Touch on a resize handle - start resize, prevent page scroll
     const handle = e.target.closest('.resize-handle');
     if (handle) {
         e.preventDefault();
@@ -139,7 +139,7 @@ document.addEventListener('touchstart', (e) => {
         return;
     }
 
-    // Touch on the titlebar — start drag, prevent page scroll
+    // Touch on the titlebar - start drag, prevent page scroll
     const titlebar = e.target.closest('.window-titlebar');
     if (titlebar && !e.target.dataset.action) {
         const win = titlebar.closest('.window');
@@ -177,7 +177,7 @@ document.addEventListener('touchend', (e) => {
 
     if (titlebar && !e.target.dataset.action) {
         if (now - lastTapTime < 350 && lastTapEl === titlebar) {
-            // Second tap within 350 ms on the same titlebar — maximise/restore
+            // Second tap within 350 ms on the same titlebar - maximise/restore
             toggleMaximize(titlebar.closest('.window'));
             lastTapTime = 0;
             lastTapEl   = null;
@@ -187,7 +187,7 @@ document.addEventListener('touchend', (e) => {
         lastTapTime = now;
         lastTapEl   = titlebar;
     } else {
-        // Tapped somewhere other than a titlebar — reset the tracker
+        // Tapped somewhere other than a titlebar - reset the tracker
         lastTapTime = 0;
         lastTapEl   = null;
     }

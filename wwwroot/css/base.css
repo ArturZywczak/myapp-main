@@ -1,7 +1,7 @@
 /* ============================================================
    base.css
    Global reset, desktop container, desktop icons.
-   No component-specific styles — those live in their own files.
+   No component-specific styles - those live in their own files.
    ============================================================ */
 
 
@@ -41,7 +41,7 @@ body.windows-mode .window-content span:not(.app-menubar *) {
     width: 100vw;
 }
 
-/* Main desktop area — expands to fill the space above the taskbar */
+/* Main desktop area - expands to fill the space above the taskbar */
 .desktop {
     flex: 1;
     overflow: hidden;

@@ -2,7 +2,7 @@
 // boot.js
 // Clock, global event handlers, Start menu, language picker,
 // boot/welcome sequence, and app initialisation.
-// Must be loaded last — depends on all other modules.
+// Must be loaded last - depends on all other modules.
 // ============================================================
 
 
@@ -110,7 +110,7 @@ document.addEventListener('click', (e) => {
         return;
     }
 
-    // Desktop icon — single click selects it
+    // Desktop icon - single click selects it
     const icon = e.target.closest('.desktop-icon');
     if (icon) {
         document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));

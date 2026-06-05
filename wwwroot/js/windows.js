@@ -98,7 +98,7 @@ function openWindow(appId) {
 
 // --- Open a folder (Explorer) window ----------------------
 
-// Builds the full XP Explorer chrome — menu bar, toolbar,
+// Builds the full XP Explorer chrome - menu bar, toolbar,
 // address bar, sidebar panels, and an icon grid.
 // Double-clicking a grid item calls openProjectWindow().
 function openFolder(folderId) {
@@ -272,7 +272,7 @@ function openProjectWindow(item) {
         </div>
     `;
 
-    // Start maximised — restore falls back to the inline styles above
+    // Start maximised - restore falls back to the inline styles above
     win.classList.add('maximized');
 
     topZIndex++;

@@ -6,7 +6,7 @@ namespace MainApp.Services;
 
 // Sends contact-form emails via OVH SMTP.
 // SMTP credentials are injected from environment variables at runtime
-// (Mail__Password, Mail__To) — never stored in source control.
+// (Mail__Password, Mail__To) - never stored in source control.
 public class MailService(IConfiguration config)
 {
     public async Task SendContactAsync(string from, string subject, string body)
@@ -20,7 +20,7 @@ public class MailService(IConfiguration config)
         message.From.Add(new MailboxAddress("Portfolio", cfg["User"]));
         message.To.Add(MailboxAddress.Parse(cfg["To"]!));
         // Reply-To is set only if the visitor provided a valid email address.
-        // If they typed a name or anything else, it's silently skipped —
+        // If they typed a name or anything else, it's silently skipped -
         // the address is still visible in the message body.
         if (MailboxAddress.TryParse(from, out var replyTo))
             message.ReplyTo.Add(replyTo);

@@ -199,7 +199,7 @@
 .resize-e  { right: -4px;  top: 10px;    bottom: 10px; width: 8px;   cursor: e-resize;  }
 .resize-w  { left: -4px;   top: 10px;    bottom: 10px; width: 8px;   cursor: w-resize;  }
 
-/* Corner handles — rendered on top of edge handles */
+/* Corner handles - rendered on top of edge handles */
 .resize-ne { top: -4px;    right: -4px;  width: 14px;  height: 14px; cursor: ne-resize; }
 .resize-se { bottom: -4px; right: -4px;  width: 14px;  height: 14px; cursor: se-resize; }
 .resize-sw { bottom: -4px; left: -4px;   width: 14px;  height: 14px; cursor: sw-resize; }

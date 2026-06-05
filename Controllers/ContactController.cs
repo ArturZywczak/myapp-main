@@ -9,10 +9,10 @@ namespace MainApp.Controllers;
 [Route("api/[controller]")]
 public class ContactController(MailService mail) : ControllerBase
 {
-    // From    — visitor's reply-to address
-    // Subject — email subject
-    // Body    — message body
-    // Website — honeypot field, must always be empty for real humans
+    // From    - visitor's reply-to address
+    // Subject - email subject
+    // Body    - message body
+    // Website - honeypot field, must always be empty for real humans
     public record ContactDto(string From, string Subject, string Body, string Website = "");
 
     [HttpPost]
