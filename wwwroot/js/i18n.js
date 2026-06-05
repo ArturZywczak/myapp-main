@@ -148,6 +148,18 @@ Autor: Artur Żywczak
 Kontakt: kontakt@rudex.click`,
         
         'project-info-readme': '=== Health Tracker - README ===\n\n(uzupełnij treść...)',
+
+        // shutdown battery tray
+        'battery-remaining':     'Pozostało:',
+        'battery-extend':        'Przedłuż o 10 min',
+        'battery-off':           'Wyłączanie…',
+        'balloon-initial-title': 'Serwer wyłączy się za 15 minut',
+        'balloon-initial-body':  'Gdy zostanie mniej niż 5 minut, kliknij ikonę baterii aby przedłużyć działanie.',
+        'balloon-low-title':     'Bateria niska',
+        'balloon-low-body':      'Serwer wyłączy się za ~5 minut. Kliknij poniższy przycisk aby przedłużyć działanie o 10 minut.',
+        'balloon-dead-title':    'Uwaga — wyłączenie za minutę!',
+        'balloon-dead-body':     'Serwer zaraz się wyłączy.',
+        'balloon-dead-hint':     'Aby uruchomić ponownie, odwiedź stronę główną na Pi.',
     },
 
     en: {
@@ -289,6 +301,18 @@ Author: Artur Żywczak
 Contact: kontakt@rudex.click`,
 
         'project-info-readme': '=== Health Tracker - README ===\n\n(fill in content...)',
+
+        // shutdown battery tray
+        'battery-remaining':     'Remaining:',
+        'battery-extend':        'Extend by 10 min',
+        'battery-off':           'Shutting down…',
+        'balloon-initial-title': 'Server will shut down in 15 minutes',
+        'balloon-initial-body':  'When less than 5 minutes remain, click the battery icon to extend uptime.',
+        'balloon-low-title':     'Low battery',
+        'balloon-low-body':      'Server shuts down in ~5 minutes. Click the button below to extend uptime by 10 minutes.',
+        'balloon-dead-title':    'Warning — shutdown in 1 minute!',
+        'balloon-dead-body':     'The server is about to shut down.',
+        'balloon-dead-hint':     'To restart, visit the home page on the Pi.',
     }
 };
 

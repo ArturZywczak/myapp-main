@@ -395,3 +395,220 @@
     background: linear-gradient(to bottom, #b4ccec, #d0e4f8);
     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
 }
+
+
+/* ============================================================
+   Shutdown battery — system tray indicator
+   ============================================================ */
+
+
+/* Battery icon button in the tray */
+.tray-battery-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.tray-battery-btn:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.tray-battery-btn img {
+    width: 14px;
+    height: 20px;
+    display: block;
+}
+
+/* Dead battery blink */
+@keyframes battery-blink {
+    0%,  49% { opacity: 1;    }
+    50%, 100% { opacity: 0.1; }
+}
+
+.battery-blink {
+    animation: battery-blink 1s step-start infinite;
+}
+
+
+/* === XP-style notification balloon === */
+
+.battery-balloon {
+    position: fixed;
+    background: #ffffe1;
+    border: 1px solid #646464;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.45);
+    z-index: 10001;
+    width: 280px;
+    border-radius: 3px;
+    padding: 8px 10px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+
+.battery-balloon.hidden { display: none; }
+
+/* Triangle pointer at the bottom, pointing down to the tray */
+.battery-balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    border: 10px solid transparent;
+    border-top: 10px solid #646464;
+    border-bottom: 0;
+}
+
+.battery-balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 11px;
+    border: 9px solid transparent;
+    border-top: 9px solid #ffffe1;
+    border-bottom: 0;
+}
+
+.bb-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.bb-icon {
+    font-size: 15px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.bb-title {
+    flex: 1;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.bb-close {
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 9px;
+    color: #555;
+    padding: 1px 3px;
+    line-height: 1;
+    flex-shrink: 0;
+    border-radius: 2px;
+}
+
+.bb-close:hover {
+    background: #e0e0e0;
+    border-color: #aaa;
+    color: #000;
+}
+
+.bb-body {
+    font-size: 11px;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.bb-hint {
+    font-size: 10px;
+    color: #666;
+    margin: 4px 0 0;
+    font-style: italic;
+}
+
+.bb-hint.hidden { display: none; }
+
+.bb-extend {
+    margin-top: 6px;
+    display: block;
+    width: 100%;
+    padding: 3px 8px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #e8f0fc, #ccdaf0);
+    border: 1px solid #7b9ebd;
+    border-radius: 3px;
+    color: #000;
+    text-align: center;
+}
+
+.bb-extend:hover:not(:disabled) {
+    background: linear-gradient(to bottom, #d0e4f8, #b4ccec);
+}
+
+.bb-extend.hidden  { display: none; }
+
+.bb-extend:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+
+/* === Battery context menu === */
+
+.battery-menu {
+    position: fixed;
+    background: white;
+    border: 1px solid #8090c0;
+    box-shadow: 2px -2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10001;
+    min-width: 190px;
+    border-radius: 4px 4px 0 0;
+    padding: 5px 0 4px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+
+.battery-menu.hidden { display: none; }
+
+.battery-menu-row {
+    display: flex;
+    gap: 4px;
+    padding: 4px 12px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.battery-menu-sep {
+    margin: 3px 0;
+    border: none;
+    border-top: 1px solid #d0d0d0;
+}
+
+.battery-menu-btn {
+    display: block;
+    width: 100%;
+    padding: 5px 12px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #000;
+}
+
+.battery-menu-btn:hover:not(:disabled) {
+    background: linear-gradient(to right, #2467d2, #4a8ae8);
+    color: white;
+}
+
+.battery-menu-btn.hidden { display: none; }
+
+.battery-menu-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}

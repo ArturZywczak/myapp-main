@@ -198,6 +198,7 @@ if (langBtn) {
         bootEl.style.display    = 'none';
         welcomeEl.style.display = 'none';
         desktop.classList.add('booted');
+        initShutdown?.();
     }
 
     // Wire the Skip Intro button

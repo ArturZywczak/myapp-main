@@ -238,6 +238,28 @@
             </div>
         </div>
 
+        <!-- === SHUTDOWN BALLOON === -->
+        <div id="battery-balloon" class="battery-balloon hidden">
+            <div class="bb-header">
+                <span class="bb-icon"></span>
+                <strong class="bb-title"></strong>
+                <button class="bb-close" title="Zamknij">✕</button>
+            </div>
+            <p class="bb-body"></p>
+            <p class="bb-hint hidden"></p>
+            <button class="bb-extend hidden"></button>
+        </div>
+
+        <!-- === SHUTDOWN MENU === -->
+        <div id="battery-menu" class="battery-menu hidden">
+            <div class="battery-menu-row">
+                <span data-i18n="battery-remaining">Pozostało:</span>
+                <strong id="battery-menu-remaining">…</strong>
+            </div>
+            <hr class="battery-menu-sep" />
+            <button id="battery-menu-extend" class="battery-menu-btn hidden"></button>
+        </div>
+
         <footer class="taskbar">
             <div class="taskbar-start" id="start-button">
                 <img src="/images/windowsStart.png" alt="" class="start-icon" />
@@ -251,6 +273,9 @@
                     <img src="/images/IconPack/Change Language.webp" alt="" />
                     <span id="lang-label">PL</span>
                 </div>
+                <div id="shutdown-battery" class="tray-battery-btn">
+                    <img id="battery-icon" src="/images/battery-full.png" alt="" />
+                </div>
                 <div class="clock">
                     <div class="clock-time">14:32</div>
                 </div>
@@ -262,6 +287,7 @@
     <script src="~/js/registry.js" asp-append-version="true"></script>
     <script src="~/js/windows.js"  asp-append-version="true"></script>
     <script src="~/js/interact.js" asp-append-version="true"></script>
+    <script src="~/js/shutdown.js" asp-append-version="true"></script>
     <script src="~/js/boot.js"     asp-append-version="true"></script>
 </body>
 </html>
