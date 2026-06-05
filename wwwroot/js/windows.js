@@ -64,6 +64,7 @@ function openWindow(appId) {
                 <span data-i18n="${app.titleKey}">${title}</span>
             </div>
             <div class="window-controls">
+              ${app.url ? `<button class="window-btn window-btn-newtab" data-action="newtab" data-url="${app.url}">↗<span class="newtab-label" data-i18n="btn-newtab"> ${t('btn-newtab')}</span></button>` : ''}
                 <button class="window-btn window-btn-min" data-action="minimize">_</button>
                 <button class="window-btn window-btn-max" data-action="maximize">□</button>
                 <button class="window-btn window-btn-close" data-action="close">✕</button>
@@ -155,12 +156,12 @@ function openFolder(folderId) {
             <span class="app-menubar-item" data-i18n="menu-help">${t('menu-help')}</span>
         </div>
         <div class="explorer-toolbar">
-            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Back.png', 16)}<span data-i18n="toolbar-back">${t('toolbar-back')}</span></button>
-            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Forward.png', 16)}<span data-i18n="toolbar-forward">${t('toolbar-forward')}</span></button>
-            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Up.png', 16)}<span data-i18n="toolbar-up">${t('toolbar-up')}</span></button>
+            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Back.webp', 16)}<span data-i18n="toolbar-back">${t('toolbar-back')}</span></button>
+            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Forward.webp', 16)}<span data-i18n="toolbar-forward">${t('toolbar-forward')}</span></button>
+            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Up.webp', 16)}<span data-i18n="toolbar-up">${t('toolbar-up')}</span></button>
             <div class="explorer-toolbar-sep"></div>
-            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Search.png', 16)}<span data-i18n="toolbar-search">${t('toolbar-search')}</span></button>
-            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Folder View.png', 16)}<span data-i18n="toolbar-folders">${t('toolbar-folders')}</span></button>
+            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Search.webp', 16)}<span data-i18n="toolbar-search">${t('toolbar-search')}</span></button>
+            <button class="explorer-toolbar-btn">${iconHtml('/images/IconPack/Folder View.webp', 16)}<span data-i18n="toolbar-folders">${t('toolbar-folders')}</span></button>
         </div>
         <div class="explorer-addressbar">
             <span class="explorer-addressbar-label" data-i18n="addressbar-label">${t('addressbar-label')}</span>
@@ -174,18 +175,18 @@ function openFolder(folderId) {
                 <div class="explorer-panel">
                     <div class="explorer-panel-header" data-i18n="panel-system-tasks">${t('panel-system-tasks')}</div>
                     <div class="explorer-panel-body">
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/New Folder.png', 16)} <span data-i18n="panel-new-folder">${t('panel-new-folder')}</span></div>
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Publish to web.png', 16)} <span data-i18n="panel-publish">${t('panel-publish')}</span></div>
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Email.png', 16)} <span data-i18n="panel-share">${t('panel-share')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/New Folder.webp', 16)} <span data-i18n="panel-new-folder">${t('panel-new-folder')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Publish to web.webp', 16)} <span data-i18n="panel-publish">${t('panel-publish')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Email.webp', 16)} <span data-i18n="panel-share">${t('panel-share')}</span></div>
                     </div>
                 </div>
                 <div class="explorer-panel">
                     <div class="explorer-panel-header" data-i18n="panel-other-places">${t('panel-other-places')}</div>
                     <div class="explorer-panel-body">
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Desktop.png', 16)} <span data-i18n="panel-desktop">${t('panel-desktop')}</span></div>
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Documents.png', 16)} <span data-i18n="panel-my-docs">${t('panel-my-docs')}</span></div>
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Computer.png', 16)} <span data-i18n="panel-my-computer">${t('panel-my-computer')}</span></div>
-                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Network Places.png', 16)} <span data-i18n="panel-network">${t('panel-network')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/Desktop.webp', 16)} <span data-i18n="panel-desktop">${t('panel-desktop')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Documents.webp', 16)} <span data-i18n="panel-my-docs">${t('panel-my-docs')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Computer.webp', 16)} <span data-i18n="panel-my-computer">${t('panel-my-computer')}</span></div>
+                        <div class="explorer-panel-item">${iconHtml('/images/IconPack/My Network Places.webp', 16)} <span data-i18n="panel-network">${t('panel-network')}</span></div>
                     </div>
                 </div>
                 <div class="explorer-panel">
@@ -259,6 +260,7 @@ function openProjectWindow(item) {
                 <span>${title}</span>
             </div>
             <div class="window-controls">
+              ${item.url ? `<button class="window-btn window-btn-newtab" data-action="newtab" data-url="${item.url}">↗ <span class="newtab-label" data-i18n="btn-newtab"> ${t('btn-newtab')}</span></button>` : ''}
                 <button class="window-btn window-btn-min" data-action="minimize">_</button>
                 <button class="window-btn window-btn-max" data-action="maximize">⧉</button>
                 <button class="window-btn window-btn-close" data-action="close">✕</button>

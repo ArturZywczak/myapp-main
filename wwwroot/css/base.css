@@ -47,7 +47,7 @@ body.windows-mode .window-content span:not(.app-menubar *) {
     overflow: hidden;
     position: relative;
     background-color: #3a6ea5;              /* fallback colour if image fails */
-    background-image: url('/images/bliss.jpg');
+    background-image: url('/images/bliss.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

@@ -16,6 +16,9 @@ const translations = {
         'icon-my-projects':   'Moje projekty',
         'icon-cv-pl':         'CV Polskie.pdf',
         'icon-cv-en':         'CV English.pdf',
+        'icon-whyslow':       'Dlaczego to się tak wolno ładuje.txt',
+        'icon-github': 'Mój profil GitHub.exe',
+        'icon-linkedin': 'Mój profil LinkedIn.exe',
 
         // start menu programs
         'start-prog-ie':     'Internet Explorer',
@@ -46,6 +49,9 @@ const translations = {
         // welcome screen
         'welcome-text': 'Zapraszamy',
 
+        // title buttons
+        'btn-newtab': 'Otwórz w nowej karcie',
+
         // app window titles
         'app-my-computer':  'Mój komputer',
         'app-notepad':      'Bez tytułu — Notatnik',
@@ -53,6 +59,9 @@ const translations = {
         'app-cv-en':        'CV Polskie (English)',
         'folder-my-projects': 'Moje projekty',
         'app-health-tracker-readme': 'Health Tracker — README',
+        'app-notepad-whyslow': 'Dlaczego to się tak wolno ładuje',
+        'app-github': 'Mój profil GitHub',
+        'app-linkedin': 'Mój profil LinkedIn',
 
         // app menu bar
         'menu-file':      'Plik',
@@ -119,7 +128,11 @@ Ekstraklasa Terminal – tabela ligowa, symulacja ostatniej kolejki
 
 Autor: Artur Żywczak`,
         
-        'project-info-readme': '=== Health Tracker — README ===\n\n(uzupełnij treść...)'
+        'project-info-readme': '=== Health Tracker — README ===\n\n(uzupełnij treść...)',
+
+        'notepad-whyslow-text': `Serwer działa na moim domowym komputerze z prędkością łącza 12 Mbps pobierania i 3 Mbps wysyłania. Mało. 
+Mieszkam na wsi i to w miejscu daleko od centrum. Światłowodu nie ma i podobno długo nie będzie, jedyna opcja to internet radiowy.
+Mógłbym skorzystać z jakiegoś hostingu, ale jednym z celów tego projektu było nauczenie się jak postawić taki projekt od zera.`
     },
 
     en: {
@@ -128,7 +141,10 @@ Autor: Artur Żywczak`,
         'icon-notepad':       'Notepad',
         'icon-my-projects':   'My Projects',
         'icon-cv-pl':         'CV Polish.pdf',
-        'icon-cv-en':         'CV English.pdf',
+        'icon-cv-en': 'CV English.pdf',
+        'icon-whyslow': 'Why does it load so slowly.txt',
+        'icon-github': 'My Github Profile.exe',
+        'icon-linkedin': 'My LinkedIn Profile.exe',
 
         // start menu programs
         'start-prog-ie':     'Internet Explorer',
@@ -159,6 +175,9 @@ Autor: Artur Żywczak`,
         // welcome screen
         'welcome-text': 'Welcome',
 
+        // title buttons
+        'btn-newtab': ' Open in new tab',
+
         // app window titles
         'app-my-computer':  'My Computer',
         'app-notepad':      'Untitled — Notepad',
@@ -166,6 +185,9 @@ Autor: Artur Żywczak`,
         'app-cv-en':        'CV — webox (English)',
         'folder-my-projects': 'My Projects',
         'app-health-tracker-readme': 'Health Tracker — README',
+        'app-notepad-whyslow': 'Why does it load so slowly',
+        'app-github': 'My GitHub Profile',
+        'app-linkedin': 'My LinkedIn Profile',
 
         // app menu bar
         'menu-file':      'File',
@@ -233,7 +255,11 @@ Ekstraklasa Terminal – league table, simulation of the last round
 
 Author: webox`,
 
-        'project-info-readme': '=== Health Tracker — README ===\n\n(fill in content...)'
+        'project-info-readme': '=== Health Tracker — README ===\n\n(fill in content...)',
+
+        'notepad-whyslow-text': `Server runs on my local PC with connection speeds of 12Mbps down 3Mbps up.
+Thats definetly not enough. I live in pretty remote area, there is no fiber connection and propably there won't be for long time.
+I could use some kind of hosting but one of goals of this project was to learn how to make everything work from scratch.`
     }
 };
 

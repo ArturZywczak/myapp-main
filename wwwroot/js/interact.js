@@ -118,6 +118,7 @@ document.addEventListener('mouseup', () => {
 });
 
 
+
 // --- Touch events -----------------------------------------
 
 // Tracks the previous tap for double-tap detection

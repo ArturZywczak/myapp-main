@@ -44,10 +44,11 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // Window control buttons (close / minimise / maximise)
-    const action = e.target.dataset.action;
+    // Window control buttons (close / minimise / maximise / newtab)
+    const actionEl = e.target.closest('[data-action]');
+    const action = actionEl?.dataset.action;
     if (action) {
-        const win = e.target.closest('.window');
+        const win = actionEl.closest('.window');
         if (action === 'close') {
             // Remove both the window element and its taskbar button
             document.querySelector(`[data-window-id="${win.id}"]`)?.remove();
@@ -58,6 +59,8 @@ document.addEventListener('click', (e) => {
             setActiveWindow(null);
         } else if (action === 'maximize') {
             toggleMaximize(win);
+        } else if (action === 'newtab') {
+            window.open(actionEl.dataset.url, '_blank');
         }
         return;
     }
