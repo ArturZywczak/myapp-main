@@ -14,8 +14,6 @@ const translations = {
         'icon-my-computer':   'Mój komputer (o projekcie)',
         'icon-notepad':       'Notatnik',
         'icon-my-projects':   'Moje projekty',
-        'icon-cv-pl':         'CV Polskie.pdf',
-        'icon-cv-en':         'CV English.pdf',
         'icon-github': 'Mój profil GitHub.exe',
         'icon-linkedin': 'Mój profil LinkedIn.exe',
 
@@ -54,8 +52,6 @@ const translations = {
         // app window titles
         'app-my-computer':  'Mój komputer',
         'app-notepad':      'Bez tytułu - Notatnik',
-        'app-cv-pl':        'CV Polskie (Polski)',
-        'app-cv-en':        'CV Polskie (English)',
         'folder-my-projects': 'Moje projekty',
         'app-health-tracker-readme': 'Health Tracker - README',
         'app-github': 'Mój profil GitHub',
@@ -138,7 +134,6 @@ Deploy   : Docker, nginx, własny serwer
 • Okno "Outlook Express" – formularz kontaktowy
 • Przycisk "Otwórz w nowej karcie" w titlebarze
 • Zmiana języka: Polski / English
-• Przeglądarka PDF – moje CV
 
 --- Projekty ---
 Health Tracker       – śledzenie posiłków i ćwiczeń
@@ -168,8 +163,6 @@ Kontakt: kontakt@rudex.click`,
         'icon-my-computer':   'My Computer (About project)',
         'icon-notepad':       'Notepad',
         'icon-my-projects':   'My Projects',
-        'icon-cv-pl':         'CV Polish.pdf',
-        'icon-cv-en': 'CV English.pdf',
         'icon-github': 'My Github Profile.exe',
         'icon-linkedin': 'My LinkedIn Profile.exe',
 
@@ -208,8 +201,6 @@ Kontakt: kontakt@rudex.click`,
         // app window titles
         'app-my-computer':  'My Computer',
         'app-notepad':      'Untitled - Notepad',
-        'app-cv-pl':        'CV - webox (Polish)',
-        'app-cv-en':        'CV - webox (English)',
         'folder-my-projects': 'My Projects',
         'app-health-tracker-readme': 'Health Tracker - README',
         'app-github': 'My GitHub Profile',
@@ -292,7 +283,6 @@ Deploy   : Docker, nginx, self-hosted
 • Outlook Express window – contact form
 • "Open in new tab" button in title bar
 • Language switcher: Polish / English
-• PDF viewer – my CV
 
 --- Projects ---
 Health Tracker       – meal and workout tracker

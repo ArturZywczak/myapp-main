@@ -47,26 +47,8 @@ const apps = {
     },
 
 
-    // CV files open in an iframe so the browser renders the PDF inline
-    'cv-pl': {
-        titleKey: 'app-cv-pl',
-        icon: '/images/IconPack/Adobe Reader.webp',
-        url: '/docs/CV_PL.pdf',
-        width: 820,
-        height: 620,
-        windowClass: 'pdf-window',
-        content: '<iframe src="/docs/CV_PL.pdf" style="width:100%;height:100%;border:none;display:block;"></iframe>'
-    },
-
-    'cv-en': {
-        titleKey: 'app-cv-en',
-        icon: '/images/IconPack/Adobe Reader.webp',
-        url: '/docs/CV_EN.pdf',
-        width: 820,
-        height: 620,
-        windowClass: 'pdf-window',
-        content: '<iframe src="/docs/CV_EN.pdf" style="width:100%;height:100%;border:none;display:block;"></iframe>'
-    },
+    //sites files open in an iframe
+    //used for opening pdfs so the browser renders the PDF inline
 
     'github-link': {
         titleKey: 'app-github',
