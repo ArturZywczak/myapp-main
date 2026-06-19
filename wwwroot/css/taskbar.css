@@ -425,6 +425,13 @@
     display: block;
 }
 
+/* SSH / AC-power icon is square and has no alpha — multiply blends white away */
+.tray-battery-btn img.battery-icon-ssh {
+    width: 20px;
+    height: 20px;
+    mix-blend-mode: multiply;
+}
+
 /* Dead battery blink */
 @keyframes battery-blink {
     0%,  49% { opacity: 1;    }

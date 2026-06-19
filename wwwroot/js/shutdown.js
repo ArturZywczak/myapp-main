@@ -52,7 +52,9 @@ function _canExtend() {
 
 function _setIcon(state) {
     const img = document.getElementById('battery-icon');
-    if (img) img.src = _ICONS[state];
+    if (!img) return;
+    img.src = _ICONS[state];
+    img.classList.toggle('battery-icon-ssh', state === 'ssh');
 }
 
 function _setBlink(on) {
