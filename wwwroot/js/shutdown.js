@@ -13,20 +13,23 @@ const _ICONS = {
     medium: '/images/battery-medium.png',
     low:    '/images/battery-low.png',
     dead:   '/images/battery-dead.png',
+    ssh:    '/images/battery-ssh.png',   // AC power — active SSH session
 };
 
 let _started       = false;
 let _lastSecs      = null;
-let _lastState     = null;   // 'full' | 'medium' | 'low' | 'dead'
+let _lastState     = null;   // 'full' | 'medium' | 'low' | 'dead' | 'ssh'
 let _balloonTimer  = null;
 let _extendPending = false;
 let _shownLow      = false;
 let _shownDead     = false;
+let _shownSsh      = false;
 
 
 // ─── State helpers ─────────────────────────────────────────
 
-function _stateOf(secs) {
+function _stateOf(secs, sshActive) {
+    if (sshActive) return 'ssh';
     if (secs === null || secs <= 0) return 'dead';
     if (secs <= 300) return 'low';
     if (secs <= 600) return 'medium';
@@ -55,6 +58,16 @@ function _setIcon(state) {
 function _setBlink(on) {
     const img = document.getElementById('battery-icon');
     if (img) img.classList.toggle('battery-blink', on);
+}
+
+
+// ─── Shutdown screen ──────────────────────────────────────
+
+function _triggerShutdownScreen() {
+    const s = document.getElementById('shutdown-screen');
+    if (!s) return;
+    s.classList.remove('hidden');
+    setTimeout(() => { window.location.href = 'https://rudex.click'; }, 10_000);
 }
 
 
@@ -114,6 +127,12 @@ function _showBalloon(type) {
                 hintEl.classList.remove('hidden');
             }
             break;
+
+        case 'ssh':
+            if (iconEl)  iconEl.textContent  = '🔌';
+            if (titleEl) titleEl.textContent = t('balloon-ssh-title');
+            if (bodyEl)  bodyEl.textContent  = t('balloon-ssh-body');
+            break;
     }
 
     b.classList.remove('hidden');
@@ -133,13 +152,22 @@ function _hideBalloon() {
 function _refreshMenu() {
     const timeEl   = document.getElementById('battery-menu-remaining');
     const iconEl   = document.getElementById('battery-menu-icon');
+    const infoEl   = document.querySelector('.battery-menu-info');
     const extendEl = document.getElementById('battery-menu-extend');
-    if (timeEl)   timeEl.textContent = _fmtTime(_lastSecs);
-    if (iconEl)   iconEl.src = _ICONS[_lastState ?? 'full'];
-    if (extendEl) {
-        extendEl.textContent = t('battery-extend');
-        extendEl.disabled    = _extendPending;
-        extendEl.disabled = !_canExtend() || _extendPending;
+
+    if (iconEl) iconEl.src = _ICONS[_lastState ?? 'full'];
+
+    if (_lastState === 'ssh') {
+        if (timeEl)   timeEl.textContent = t('battery-ssh-remaining');
+        if (infoEl)   infoEl.textContent = t('battery-ssh-info');
+        if (extendEl) { extendEl.textContent = t('battery-extend'); extendEl.disabled = true; }
+    } else {
+        if (timeEl)   timeEl.textContent = _fmtTime(_lastSecs);
+        if (infoEl)   infoEl.textContent = t('battery-info');
+        if (extendEl) {
+            extendEl.textContent = t('battery-extend');
+            extendEl.disabled = !_canExtend() || _extendPending;
+        }
     }
 }
 
@@ -160,9 +188,9 @@ function _hideMenu() {
 // ─── Apply status ─────────────────────────────────────────
 
 function _applyStatus(data) {
-    const secs = (data && typeof data.remaining_seconds === 'number')
-        ? data.remaining_seconds : null;
-    const newState  = _stateOf(secs);
+    const secs      = (data && typeof data.remaining_seconds === 'number') ? data.remaining_seconds : null;
+    const sshActive = !!(data?.ssh_active);
+    const newState  = _stateOf(secs, sshActive);
     const prevState = _lastState;
 
     _lastSecs  = secs;
@@ -175,10 +203,22 @@ function _applyStatus(data) {
     const m = document.getElementById('battery-menu');
     if (m && !m.classList.contains('hidden')) _refreshMenu();
 
-    // State-change balloons — fire once per countdown cycle
-    if (prevState !== null && newState !== prevState) {
+    // SSH becomes active: reset low/dead flags so balloons fire again after SSH ends
+    if (prevState !== null && prevState !== 'ssh' && newState === 'ssh') {
+        _shownLow  = false;
+        _shownDead = false;
+        if (!_shownSsh) { _shownSsh = true; _showBalloon('ssh'); }
+    }
+
+    // SSH disconnected → allow the SSH balloon to fire again next time
+    if (prevState === 'ssh' && newState !== 'ssh') {
+        _shownSsh = false;
+    }
+
+    // State-change balloons — fire once per countdown cycle (ignore SSH state)
+    if (prevState !== null && newState !== prevState && newState !== 'ssh') {
         if (newState === 'low'  && !_shownLow)  { _shownLow  = true; _showBalloon('low');  }
-        if (newState === 'dead' && !_shownDead) { _shownDead = true; _showBalloon('dead'); }
+        if (newState === 'dead' && !_shownDead) { _shownDead = true; _showBalloon('dead'); _triggerShutdownScreen(); }
     }
 }
 
@@ -263,7 +303,8 @@ async function initShutdown() {
 
     if (init !== null) {
         _applyStatus(init);
-        _showBalloon('initial');
+        // Don't show "server will shut down" balloon if SSH is already active
+        if (!init.ssh_active) _showBalloon('initial');
     } else {
         // Server already unresponsive at page load
         _shownDead = true;

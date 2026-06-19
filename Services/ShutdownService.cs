@@ -1,24 +1,25 @@
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace MainApp.Services;
 
 public record ShutdownStatus(
     [property: JsonPropertyName("remaining_seconds")] int RemainingSeconds,
-    [property: JsonPropertyName("can_extend")] bool CanExtend
+    [property: JsonPropertyName("can_extend")] bool CanExtend,
+    [property: JsonPropertyName("ssh_active")] bool SshActive
 );
 
 public class ShutdownService
 {
     private const string FilePath = "/app/logs/shutdown_at";
-    private const int DefaultSeconds = 15 * 60;   // 15 min
-    private const int ExtendSeconds  = 10 * 60;   // 10 min
-    private const int ExtendThreshold = 10 * 60;   // można extend gdy ≤ 10 min
+    private const int DefaultSeconds  = 15 * 60;  // 15 min
+    private const int ExtendThreshold = 10 * 60;  // can extend when ≤ 10 min
 
     private readonly object _lock = new();
 
-    // Wywołane raz przy starcie aplikacji.
-    // Jeśli plik nie istnieje lub timestamp jest w przeszłości → ustaw now+15min.
-    // Jeśli plik ma przyszły timestamp → zostaw bez zmian (np. docker restart w trakcie sesji).
+    // Called once at app startup.
+    // If the file is missing or in the past → set now+15min.
+    // If file has a future timestamp → leave it (e.g. docker restart mid-session).
     public void Initialize()
     {
         lock (_lock)
@@ -31,13 +32,27 @@ public class ShutdownService
 
     public ShutdownStatus GetStatus()
     {
+        var sshActive = IsSshActive();
+
+        // While SSH is connected keep pushing the shutdown time forward
+        // so the server never shuts down during an active admin session.
+        if (sshActive)
+        {
+            lock (_lock)
+            {
+                var newTime  = DateTimeOffset.UtcNow.AddSeconds(DefaultSeconds);
+                var existing = Read();
+                if (existing == null || existing.Value < newTime)
+                    Write(newTime);
+            }
+        }
+
         var shutdownAt = Read() ?? DateTimeOffset.UtcNow.AddSeconds(DefaultSeconds);
         var remaining  = (int)(shutdownAt - DateTimeOffset.UtcNow).TotalSeconds;
-        return new ShutdownStatus(remaining, remaining <= ExtendThreshold);
+        return new ShutdownStatus(remaining, remaining <= ExtendThreshold, sshActive);
     }
 
-    // Reset: ustaw na max(teraz+15min, aktualna wartość).
-    // Odwiedzenie strony nie skraca istniejącego countdownu.
+    // Called when the user visits the page — extends to at least 15 min from now.
     public ShutdownStatus Reset()
     {
         lock (_lock)
@@ -50,8 +65,7 @@ public class ShutdownService
         return GetStatus();
     }
 
-    // Extend: +10 min — tylko gdy remaining ≤ 5 min.
-    // Zwraca (true, status) lub (false, status) gdy za wcześnie.
+    // Extend: reset to 15 min — only allowed when ≤ 10 min remain.
     public (bool Success, ShutdownStatus Status) TryExtend()
     {
         lock (_lock)
@@ -60,13 +74,39 @@ public class ShutdownService
             if (status.RemainingSeconds > ExtendThreshold)
                 return (false, status);
 
-            var shutdownAt = Read() ?? DateTimeOffset.UtcNow;
-            Write(DateTimeOffset.UtcNow.AddSeconds(DefaultSeconds)); // reset to 15 min
+            Write(DateTimeOffset.UtcNow.AddSeconds(DefaultSeconds));
         }
         return (true, GetStatus());
     }
 
-    // --- helpers ---
+    // --- SSH detection ---
+
+    // Detects active SSH sessions by reading /run/utmp via the `who` command.
+    // Requires: procps package + /run/utmp mounted from host (see docker-compose).
+    private static bool IsSshActive()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo("who")
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            using var proc = Process.Start(psi);
+            if (proc == null) return false;
+            var output = proc.StandardOutput.ReadToEnd();
+            proc.WaitForExit(2000);
+            // SSH sessions appear as pts/ (pseudo-terminal over network) in `who` output
+            return output.Split('\n').Any(l => l.Contains("pts/"));
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    // --- file helpers ---
 
     private DateTimeOffset? Read()
     {
