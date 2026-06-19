@@ -157,7 +157,10 @@ function _refreshMenu() {
     const infoEl   = document.querySelector('.battery-menu-info');
     const extendEl = document.getElementById('battery-menu-extend');
 
-    if (iconEl) iconEl.src = _ICONS[_lastState ?? 'full'];
+    if (iconEl) {
+        iconEl.src = _ICONS[_lastState ?? 'full'];
+        iconEl.classList.toggle('battery-icon-ssh', _lastState === 'ssh');
+    }
 
     if (_lastState === 'ssh') {
         if (timeEl)   timeEl.textContent = t('battery-ssh-remaining');

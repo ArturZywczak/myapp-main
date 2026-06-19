@@ -425,11 +425,15 @@
     display: block;
 }
 
-/* SSH / AC-power icon is square and has no alpha — multiply blends white away */
+/* SSH / AC-power icon is square — override portrait battery dimensions */
 .tray-battery-btn img.battery-icon-ssh {
     width: 20px;
     height: 20px;
-    mix-blend-mode: multiply;
+}
+
+.battery-menu-icon.battery-icon-ssh {
+    width: 32px;
+    height: 32px;
 }
 
 /* Dead battery blink */

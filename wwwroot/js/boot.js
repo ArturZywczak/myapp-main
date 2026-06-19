@@ -216,6 +216,17 @@ if (langBtn) {
 }());
 
 
+// --- Start menu: Turn Off Computer -------------------------
+
+const shutdownBtn = document.getElementById('start-shutdown-btn');
+if (shutdownBtn) {
+    shutdownBtn.addEventListener('click', () => {
+        document.getElementById('start-menu')?.classList.add('hidden');
+        _triggerShutdownScreen?.();
+    });
+}
+
+
 // --- Initialisation ----------------------------------------
 
 // Apply the saved (or default) language to all data-i18n elements
