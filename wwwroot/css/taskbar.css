@@ -425,9 +425,9 @@
     display: block;
 }
 
-/* SSH / AC-power icon is square — override portrait battery dimensions */
+/* SSH / AC-power icon — same dimensions as other battery icons */
 .tray-battery-btn img.battery-icon-ssh {
-    width: 20px;
+    width: 14px;
     height: 20px;
 }
 

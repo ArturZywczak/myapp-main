@@ -69,7 +69,7 @@ function _triggerShutdownScreen() {
     const s = document.getElementById('shutdown-screen');
     if (!s) return;
     s.classList.remove('hidden');
-    setTimeout(() => { window.location.href = 'https://rudex.click'; }, 10_000);
+    setTimeout(() => { window.location.href = 'https://rudex.click'; }, 6_000);
 }
 
 
