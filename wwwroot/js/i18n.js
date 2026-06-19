@@ -142,7 +142,76 @@ Ekstraklasa Terminal – tabela ligowa PKO BP Ekstraklasy
 Autor: Artur Żywczak
 Kontakt: kontakt@rudex.click`,
         
-        'project-info-readme': '=== Health Tracker - README ===\n\n(uzupełnij treść...)',
+        'project-info-readme': `================================================================================
+  HEALTH TRACKER
+================================================================================
+  Aplikacja do śledzenia diety, aktywności fizycznej i postępów zdrowotnych.
+  Dostępna pod adresem: https://main.rudex.click/health/
+--------------------------------------------------------------------------------
+  TECHNOLOGIE
+--------------------------------------------------------------------------------
+  Backend
+    - Node.js + Express 4
+    - MariaDB 11 (baza danych)
+    - Google Drive API (synchronizacja danych z Claude.ai)
+    - OpenFoodFacts API (wyszukiwanie produktów po kodzie kreskowym)
+  Frontend
+    - React 18
+    - Vite 5 (bundler)
+    - Tailwind CSS (stylowanie)
+  Infrastruktura
+    - Docker + Docker Compose (kontenery)
+    - nginx (reverse proxy)
+    - Cloudflare Tunnel (publiczny dostęp HTTPS)
+    - Automatyczny deploy z GitHub co 5 minut
+--------------------------------------------------------------------------------
+  JAK DZIAŁA
+--------------------------------------------------------------------------------
+  Aplikacja składa się z trzech kontenerów Docker:
+    health-api       Port 3100   REST API (Node.js)
+    health-frontend  Port 3101   Interfejs (React, serwowany przez nginx)
+    mariadb-health   Port 3306   Baza danych (tylko sieć wewnętrzna Docker)
+  Żaden port nie jest eksponowany bezpośrednio na zewnątrz. Ruch trafia przez
+  główny nginx działający jako reverse proxy:
+    /health/         →  health-frontend
+    /health-api/     →  health-api
+  Każde żądanie do API wymaga nagłówka X-API-Key. Frontend pobiera klucz
+  ze zmiennych środowiskowych podczas budowania (Vite).
+  Schemat bazy danych:
+    users        Profil użytkownika (wiek, wzrost, płeć, poziom aktywności)
+    goals        Cele kaloryczne i makroskładnikowe (z datą ważności)
+    daily_logs   Dzienna waga i liczba kroków
+    meals        Posiłki (kcal, białko, tłuszcze, węglowodany)
+    activities   Aktywności fizyczne (czas trwania, spalone kcal)
+--------------------------------------------------------------------------------
+  FUNKCJE
+--------------------------------------------------------------------------------
+  Dziś
+    Dzienne podsumowanie kalorii i makroskładników. Pierścień kalorii pokazuje
+    postęp względem celu. Lista posiłków i aktywności z możliwością dodawania,
+    edycji i usuwania. Rejestracja wagi i kroków.
+  Wykresy
+    Wykresy historyczne: waga, kalorie, makroskładniki, aktywność.
+  Historia
+    Przeglądanie wpisów z wybranego zakresu dat. Widok paginowany (10 dni
+    na stronę). Każdy dzień rozwijany po kliknięciu — szczegóły posiłków
+    i aktywności.
+  Profil
+    Dane użytkownika i aktualny cel kaloryczny.
+  Skanowanie kodów kreskowych
+    Wyszukiwanie wartości odżywczych produktów przez OpenFoodFacts API.
+  Google Drive Sync
+    Claude.ai może zapisywać dane do pliku pending.json w Google Drive.
+    API odbiera je co 10 minut i wpisuje do bazy danych.
+--------------------------------------------------------------------------------
+  DOSTĘP
+--------------------------------------------------------------------------------
+  Demo (użytkownik publiczny):
+    https://main.rudex.click/health/
+  Widok właściciela (pełne dane):
+    https://main.rudex.click/health/?key=<token>
+================================================================================
+`,
 
         // shutdown battery tray
         'battery-remaining':     'Pozostało:',
@@ -296,7 +365,74 @@ Ekstraklasa Terminal – PKO BP Ekstraklasa league table
 Author: Artur Żywczak
 Contact: kontakt@rudex.click`,
 
-        'project-info-readme': '=== Health Tracker - README ===\n\n(fill in content...)',
+        'project-info-readme': `================================================================================
+  HEALTH TRACKER
+================================================================================
+  An application for tracking diet, physical activity, and health progress.
+  Available at: https://main.rudex.click/health/
+--------------------------------------------------------------------------------
+  TECHNOLOGIES
+--------------------------------------------------------------------------------
+  Backend
+    - Node.js + Express 4
+    - MariaDB 11 (database)
+    - Google Drive API (data synchronization with Claude.ai)
+    - OpenFoodFacts API (product lookup by barcode)
+  Frontend
+    - React 18
+    - Vite 5 (bundler)
+    - Tailwind CSS (styling)
+  Infrastructure
+    - Docker + Docker Compose (containers)
+    - nginx (reverse proxy)
+    - Cloudflare Tunnel (public HTTPS access)
+    - Automatic deploy from GitHub every 5 minutes
+--------------------------------------------------------------------------------
+  HOW IT WORKS
+--------------------------------------------------------------------------------
+  The application consists of three Docker containers:
+    health-api       Port 3100   REST API (Node.js)
+    health-frontend  Port 3101   User interface (React, served by nginx)
+    mariadb-health   Port 3306   Database (internal Docker network only)
+  No ports are exposed directly to the outside. Traffic is routed through
+  a main nginx instance acting as a reverse proxy:
+    /health/         →  health-frontend
+    /health-api/     →  health-api
+  Every API request requires an X-API-Key header. The frontend receives the
+  key from environment variables at build time (Vite).
+  Database schema:
+    users        User profile (age, height, sex, activity level)
+    goals        Calorie and macro targets (with effective date)
+    daily_logs   Daily weight and step count
+    meals        Meals (kcal, protein, fat, carbohydrates)
+    activities   Physical activities (duration, calories burned)
+--------------------------------------------------------------------------------
+  FEATURES
+--------------------------------------------------------------------------------
+  Today
+    Daily summary of calories and macronutrients. A calorie ring shows progress
+    toward the daily goal. List of meals and activities with add, edit, and
+    delete support. Weight and step logging.
+  Charts
+    Historical charts: weight, calories, macros, and activity.
+  History
+    Browse entries for a selected date range. Paginated view (10 days per
+    page). Each day expands on click to show meal and activity details.
+  Profile
+    User data and current calorie goal.
+  Barcode scanning
+    Product nutritional lookup via the OpenFoodFacts API.
+  Google Drive Sync
+    Claude.ai can write data to a pending.json file in Google Drive.
+    The API picks it up every 10 minutes and saves it to the database.
+--------------------------------------------------------------------------------
+  ACCESS
+--------------------------------------------------------------------------------
+  Demo (public user):
+    https://main.rudex.click/health/
+  Owner view (full data):
+    https://main.rudex.click/health/?key=<token>
+================================================================================`,
 
         // shutdown battery tray
         'battery-remaining':     'Remaining:',
