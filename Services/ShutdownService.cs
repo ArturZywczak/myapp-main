@@ -87,7 +87,7 @@ public class ShutdownService
     private static bool IsSshActive()
     {
         const int RecordSize  = 384;
-        const short UserProcess = 8;
+        const short UserProcess = 7;  // USER_PROCESS in utmp.h
         const int UtTypeOffset = 0;
         const int UtLineOffset = 8;
         const int UtLineSize   = 32;
