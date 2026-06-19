@@ -13,7 +13,7 @@ const _ICONS = {
     medium: '/images/battery-medium.png',
     low:    '/images/battery-low.png',
     dead:   '/images/battery-dead.png',
-    ssh:    '/images/battery-ssh.png',   // AC power — active SSH session
+    ssh:    '/images/battery-bolt-outlined.png',   // AC power — active SSH session
 };
 
 let _started       = false;

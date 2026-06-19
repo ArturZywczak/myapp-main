@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace MainApp.Services;
@@ -81,24 +80,33 @@ public class ShutdownService
 
     // --- SSH detection ---
 
-    // Detects active SSH sessions by reading /run/utmp via the `who` command.
-    // Requires: procps package + /run/utmp mounted from host (see docker-compose).
+    // Reads /run/utmp (mounted from host) directly as binary — no external commands needed.
+    // utmpx record layout on Linux x86-64 / glibc (384 bytes per record):
+    //   offset  0: ut_type (short, 2 bytes)  — 8 = USER_PROCESS (active login)
+    //   offset  8: ut_line (char[32])        — "pts/N" for SSH sessions
     private static bool IsSshActive()
     {
+        const int RecordSize  = 384;
+        const short UserProcess = 8;
+        const int UtTypeOffset = 0;
+        const int UtLineOffset = 8;
+        const int UtLineSize   = 32;
+
         try
         {
-            var psi = new ProcessStartInfo("who")
+            if (!File.Exists("/run/utmp")) return false;
+            var data = File.ReadAllBytes("/run/utmp");
+            for (var i = 0; i + RecordSize <= data.Length; i += RecordSize)
             {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            using var proc = Process.Start(psi);
-            if (proc == null) return false;
-            var output = proc.StandardOutput.ReadToEnd();
-            proc.WaitForExit(2000);
-            // SSH sessions appear as pts/ (pseudo-terminal over network) in `who` output
-            return output.Split('\n').Any(l => l.Contains("pts/"));
+                var utType = BitConverter.ToInt16(data, i + UtTypeOffset);
+                if (utType != UserProcess) continue;
+                var line = System.Text.Encoding.ASCII
+                    .GetString(data, i + UtLineOffset, UtLineSize)
+                    .TrimEnd('\0');
+                if (line.StartsWith("pts/", StringComparison.Ordinal))
+                    return true;
+            }
+            return false;
         }
         catch
         {
